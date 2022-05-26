@@ -35,7 +35,7 @@ namespace MusicStore.Models
 
         }
 
-        public StrumentoMusicale(int id, string nome, string descrizione, string foto, double prezzo, int quantitaStrumento)
+        public StrumentoMusicale(string nome, string descrizione, string foto, double prezzo, int quantitaStrumento)
         {
             this.Nome = nome;
             this.Descrizione = descrizione;
