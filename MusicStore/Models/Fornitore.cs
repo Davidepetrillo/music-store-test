@@ -18,7 +18,6 @@ namespace MusicStore.Models
         [Range(1,20, ErrorMessage ="Il numero inserito non rientra nel range disponibile (1,20)")]
         public int Quantità { get; set; }
 
-
         public Fornitore()
         {
 
