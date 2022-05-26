@@ -23,9 +23,8 @@ namespace MusicStore.Models
 
         }
 
-        public Fornitore(int id, string name, DateTime data, int quantità)
-        {
-            this.Id = id;
+        public Fornitore(string name, DateTime data, int quantità)
+        {           
             this.Name = name;
             this.Data = DateTime.Now;
             this.Quantità = quantità;
