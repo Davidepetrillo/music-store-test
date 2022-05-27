@@ -81,9 +81,34 @@ namespace MusicStore.Controllers
             {
                 return NotFound("Lo Strumento Musicale  con id " + id + " non è stato trovato");
             }
+
+
+            [HttpGet]
+            public IActionResult Modifica(int id)
+            {
+
+
+                StrumentoMusicale? SmFound = null;
+                using (MusicContext db = new MusicContext())
+                {
+                    SmFound = db.StrumentoMusicale
+                        .Where(StrumentoMusicale => StrumentoMusicale.Id == id)
+                        .FirstOrDefault();
+
+
+                }
+
+                if (SmFound != null)
+                {
+                    return View("ModificaADMIN", SmFound);
+                }
+                else
+                {
+                    return NotFound("Lo Strumento Musicale  con id " + id + " non è stato trovato");
+                }
+
+
+            }
+}
         }
-
-
-
-    }
 }
