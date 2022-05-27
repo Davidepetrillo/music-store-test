@@ -6,8 +6,6 @@ namespace MusicStore.Data
     public class MusicContext : DbContext
     {
         public DbSet<StrumentoMusicale> StrumentoMusicale { get; set; }
-        public DbSet<Utente> Utente { get; set; }
-        public DbSet<Fornitore> Fornitore { get; set; }
         public DbSet<Categoria> Categoria { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

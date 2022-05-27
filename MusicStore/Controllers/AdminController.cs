@@ -10,13 +10,14 @@ namespace MusicStore.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-
+            List<StrumentoMusicale> strumentiMusicali = new List<StrumentoMusicale>();
+            
             using (MusicContext db = new MusicContext())
             {
-                List<StrumentoMusicale> StrumentiMusicali = new List<StrumentoMusicale>();
-                StrumentiMusicali = db.StrumentoMusicale.Include(StrumentiMusicali => StrumentiMusicali.Categoria).ToList<StrumentoMusicale>();
+               
+                strumentiMusicali = db.StrumentoMusicale.ToList<StrumentoMusicale>();
 
-                return View("Index", StrumentiMusicali);
+                return View("Index", strumentiMusicali);
             }
 
         }
@@ -33,7 +34,7 @@ namespace MusicStore.Controllers
                 model.StrumentiMusicali = new StrumentoMusicale();
                 model.Categorie = categorias;
 
-                return View("Create"); 
+                return View("Create", model); 
             }
             
         }
@@ -56,18 +57,19 @@ namespace MusicStore.Controllers
 
             using (MusicContext db = new MusicContext())
             {
-               StrumentoMusicale StrumentoDaCreare = new StrumentoMusicale();
+               StrumentoMusicale? StrumentoDaCreare = new StrumentoMusicale();
                 StrumentoDaCreare.Nome = nuovoStrumentoMusicale.StrumentiMusicali.Nome;
                 StrumentoDaCreare.Descrizione = nuovoStrumentoMusicale.StrumentiMusicali.Descrizione;
                 StrumentoDaCreare.Foto = nuovoStrumentoMusicale.StrumentiMusicali.Foto;
                 StrumentoDaCreare.Prezzo = nuovoStrumentoMusicale.StrumentiMusicali.Prezzo;
+                StrumentoDaCreare.QuantitaStrumento = nuovoStrumentoMusicale.StrumentiMusicali.QuantitaStrumento;
                 StrumentoDaCreare.CategoriaId = nuovoStrumentoMusicale.StrumentiMusicali.CategoriaId;
                
                 db.StrumentoMusicale.Add(StrumentoDaCreare);
                 db.SaveChanges();
-            }
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
         }
 
         //---------------------DETTAGLI---------------------------------
