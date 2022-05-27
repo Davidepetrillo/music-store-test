@@ -4,7 +4,7 @@ using MusicStore.Models;
 
 namespace MusicStore.Controllers
 {
-    public class StrumentoMusicaleController : Controller
+    public class AdminController : Controller
     {
         [HttpGet]
         public IActionResult Index() 
@@ -14,7 +14,8 @@ namespace MusicStore.Controllers
             {
                 List<StrumentoMusicale> StrumentiMusicali = new List<StrumentoMusicale>();
                 StrumentiMusicali = db.StrumentoMusicale.ToList<StrumentoMusicale>();
-                return View("HomeADMIN", StrumentiMusicali);
+
+                return View("Index", StrumentiMusicali);
             }
 
         }
@@ -26,7 +27,7 @@ namespace MusicStore.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View("CreaADMIN");
+            return View("Create");
         }
 
 
@@ -36,7 +37,7 @@ namespace MusicStore.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("CreaADMIN", nuovoStrumentoMusicale);
+                return View("Create", nuovoStrumentoMusicale);
             }
 
             using (MusicContext db = new MusicContext())
@@ -74,15 +75,40 @@ namespace MusicStore.Controllers
 
             if (SmFound != null)
             {
-                return View("DettagliADMIN", SmFound);
+                return View("Details", SmFound);
             }
             else
             {
                 return NotFound("Lo Strumento Musicale  con id " + id + " non è stato trovato");
             }
+
+
+            [HttpGet]
+            public IActionResult Modifica(int id)
+            {
+
+
+                StrumentoMusicale? SmFound = null;
+                using (MusicContext db = new MusicContext())
+                {
+                    SmFound = db.StrumentoMusicale
+                        .Where(StrumentoMusicale => StrumentoMusicale.Id == id)
+                        .FirstOrDefault();
+
+
+                }
+
+                if (SmFound != null)
+                {
+                    return View("ModificaADMIN", SmFound);
+                }
+                else
+                {
+                    return NotFound("Lo Strumento Musicale  con id " + id + " non è stato trovato");
+                }
+
+
+            }
+}
         }
-
-
-
-    }
 }
