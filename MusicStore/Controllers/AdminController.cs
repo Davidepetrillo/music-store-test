@@ -25,26 +25,43 @@ namespace MusicStore.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View("Create");
+            using(MusicContext db = new MusicContext())
+            {
+                List<Categoria> categorias = db.Categoria.ToList();
+
+                CategoriaStrumento model = new CategoriaStrumento();
+                model.StrumentiMusicali = new StrumentoMusicale();
+                model.Categorie = categorias;
+
+                return View("Create"); 
+            }
+            
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(StrumentoMusicale nuovoStrumentoMusicale)
+        public IActionResult Create(CategoriaStrumento nuovoStrumentoMusicale)
         {
             if (!ModelState.IsValid)
             {
+                using (MusicContext db = new MusicContext())
+                {
+                    List<Categoria> categories = db.Categoria.ToList();
+
+                    nuovoStrumentoMusicale.Categorie = categories;
+                }
                 return View("Create", nuovoStrumentoMusicale);
             }
 
             using (MusicContext db = new MusicContext())
             {
-
-
-               StrumentoMusicale StrumentoDaCreare = new StrumentoMusicale(nuovoStrumentoMusicale.Nome, nuovoStrumentoMusicale.Descrizione, nuovoStrumentoMusicale.Foto, nuovoStrumentoMusicale.Prezzo, nuovoStrumentoMusicale.QuantitaStrumento);
-                
-                StrumentoDaCreare.CategoriaId = nuovoStrumentoMusicale.CategoriaId;
+               StrumentoMusicale StrumentoDaCreare = new StrumentoMusicale();
+                StrumentoDaCreare.Nome = nuovoStrumentoMusicale.StrumentiMusicali.Nome;
+                StrumentoDaCreare.Descrizione = nuovoStrumentoMusicale.StrumentiMusicali.Descrizione;
+                StrumentoDaCreare.Foto = nuovoStrumentoMusicale.StrumentiMusicali.Foto;
+                StrumentoDaCreare.Prezzo = nuovoStrumentoMusicale.StrumentiMusicali.Prezzo;
+                StrumentoDaCreare.CategoriaId = nuovoStrumentoMusicale.StrumentiMusicali.CategoriaId;
                
                 db.StrumentoMusicale.Add(StrumentoDaCreare);
                 db.SaveChanges();
@@ -86,17 +103,24 @@ namespace MusicStore.Controllers
         public IActionResult Update(int id)
         {
             StrumentoMusicale? SmFound = null;
+            List<Categoria> categorias = new List<Categoria>();
+
             using (MusicContext db = new MusicContext())
             {
                 SmFound = db.StrumentoMusicale
                     .Where(strumento => strumento.Id == id)
-                    .Include(strumento => strumento.Categoria)
                     .FirstOrDefault();
+
+                categorias = db.Categoria.ToList<Categoria>();
             }
 
             if (SmFound != null)
             {
-                return View("Update", SmFound);
+                CategoriaStrumento model = new CategoriaStrumento();
+                model.StrumentiMusicali = SmFound;
+                model.Categorie = categorias;
+
+                return View("Update", model);
             }
             else
             {
@@ -106,10 +130,16 @@ namespace MusicStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(int id, StrumentoMusicale model)
+        public IActionResult Update(int id, CategoriaStrumento model)
         {
             if (!ModelState.IsValid)
             {
+                using(MusicContext db = new MusicContext())
+                {
+                    List<Categoria> categorias = db.Categoria.ToList();
+
+                    model.Categorie = categorias;
+                }
                 return View("Update", model);
             }
 
@@ -123,11 +153,11 @@ namespace MusicStore.Controllers
 
                 if (strumentoDaModificare != null)
                 {
-                    strumentoDaModificare.Nome = model.Nome;
-                    strumentoDaModificare.Descrizione = model.Descrizione;
-                    strumentoDaModificare.Foto = model.Foto;
-                    strumentoDaModificare.Prezzo = model.Prezzo;
-                    strumentoDaModificare.CategoriaId = model.CategoriaId;
+                    strumentoDaModificare.Nome = model.StrumentiMusicali.Nome;
+                    strumentoDaModificare.Descrizione = model.StrumentiMusicali.Descrizione;
+                    strumentoDaModificare.Foto = model.StrumentiMusicali.Foto;
+                    strumentoDaModificare.Prezzo = model.StrumentiMusicali.Prezzo;
+                    strumentoDaModificare.CategoriaId = model.StrumentiMusicali.CategoriaId;
 
                     context.SaveChanges();
 
