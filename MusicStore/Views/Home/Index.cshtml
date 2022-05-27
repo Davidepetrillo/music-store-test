@@ -1,15 +1,62 @@
-﻿<div class="container mt-3 mb-3">
-    <h1 class="text-center text-uppercase mx-5">Strumenti Musicali</h1>
-    <div class="row my-3">
-        <div class="col-lg-4 col-md-6 col-xs-12  text-center">
-            <div class="card my-3">
-                <img src="" class="card-img-top" alt="Image">
-                <div class="card-body">
-                    <h5 class="card-title">Cabin Website</h5>
-                    <span class="btn btn-info mx-3">Preview</span>
-                    <span class="btn btn-light text-info border border-info">Visit site</span>
-                </div>
-            </div>
+﻿<!--Sezione Strumenti-->  
+<section>
+    <div class="container mt-3 mb-3">
+        <h1 class="text-center text-uppercase mx-5">Strumenti Musicali</h1>
+        <!--Pagina in attesa dei viaggi-->
+        <div id="wait_struments" class="row text-center">
+            <h3>Caricamento Strumenti</h3>
+        </div>
+        <!--Pagina con strumenti-->
+        <div id="struments_output" class="row my-3 d-none">
+
         </div>
     </div>
-</div>
+</section>
+
+<!--Sezione degli Scripts-->
+@section Scripts  {
+    <script type="text/javascript">
+    
+loadStrument();
+    
+//Funzione che carica le card dei viaggi tramite axios
+function loadStrument() {
+
+    document.getElementById('struments_output').innerHTML = '';
+    
+    axios.get('/api/Struments/Get').then((result) => {
+        console.log(result);
+
+        if (result.data.lenght <= 0) 
+        {
+            document.getElementById('wait_struments').classList.add('d-none');
+        } 
+        else 
+        {
+            document.getElementById('wait_struments').classList.add('d-none');
+            document.getElementById('struments_output').classList.remove('d-none');
+
+            result.data.forEach(strument => {
+                
+            document.getElementById('struments_output').innerHTML +=
+            `
+                <div class="col-lg-4 col-md-6 col-xs-12  text-center">
+                    <div class="card my-3">
+                        <img src="${strumet.foto}" class="card-img-top" alt="Image">
+                        <div class="card-body">
+                            <h5 class="card-title">${strument.nome}</h5>
+                            <p class="card-text">${strument.descrizione}</p>
+                            <span class="btn btn-light text-info border border-info">Dettagli</span>
+                        </div>
+                    </div>
+                </div>
+            `
+            });
+        }
+    }).catch((error) => {
+    console.log(error);
+    });
+}
+    
+    </script>
+}
