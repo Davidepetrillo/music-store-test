@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace MusicStore.Models
 {
@@ -11,7 +12,7 @@ namespace MusicStore.Models
         [StringLength(50, ErrorMessage = "Il nome della categoria non può superare i 50 caratteri")]
         public string nomeCategoria { get; set; }
 
-
+        [JsonIgnore]
         public List<StrumentoMusicale> StrumentiMusicali { get; set; }
 
         public Categoria()

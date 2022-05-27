@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             <div class="d-flex align-items-center">
-                <h1 class="mt-3 mb-3">Nuovo Viaggio</h1>
+                <h1 class="mt-3 mb-3">Nuovo Strumento</h1>
             </div>
             <form action="@Url.Action("Create", "Admin")" method="post">
                 @Html.AntiForgeryToken()
@@ -36,7 +36,7 @@
                 <div class="mb-3">
                     <strong>Categoria:</strong>
                     <select asp-for="StrumentiMusicali.CategoriaId" class="form-select" aria-label="Default select example">
-                        <option value="">Seleziona una categoria</option>
+                        <option selected>Seleziona una categoria</option>
                         @foreach(Categoria category in Model.Categorie)
                         {
                             <option value="@category.Id">@category.nomeCategoria</option>
@@ -46,7 +46,6 @@
                 <div class="text-end">
                     <input type="submit" class="btn btn-small btn-success" value="Salva">
                 </div>
-
             </form>
         </div>
     </div>

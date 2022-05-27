@@ -10,12 +10,11 @@ namespace MusicStore.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<StrumentoMusicale> strumentiMusicali = new List<StrumentoMusicale>();
-            
+
             using (MusicContext db = new MusicContext())
             {
-               
-                strumentiMusicali = db.StrumentoMusicale.ToList<StrumentoMusicale>();
+                List<StrumentoMusicale> strumentiMusicali = new List<StrumentoMusicale>();
+                strumentiMusicali = db.StrumentoMusicale.ToList();
 
                 return View("Index", strumentiMusicali);
             }
@@ -52,12 +51,13 @@ namespace MusicStore.Controllers
 
                     nuovoStrumentoMusicale.Categorie = categories;
                 }
+
                 return View("Create", nuovoStrumentoMusicale);
             }
 
             using (MusicContext db = new MusicContext())
             {
-               StrumentoMusicale? StrumentoDaCreare = new StrumentoMusicale();
+               StrumentoMusicale StrumentoDaCreare = new StrumentoMusicale();
                 StrumentoDaCreare.Nome = nuovoStrumentoMusicale.StrumentiMusicali.Nome;
                 StrumentoDaCreare.Descrizione = nuovoStrumentoMusicale.StrumentiMusicali.Descrizione;
                 StrumentoDaCreare.Foto = nuovoStrumentoMusicale.StrumentiMusicali.Foto;
@@ -67,9 +67,9 @@ namespace MusicStore.Controllers
                
                 db.StrumentoMusicale.Add(StrumentoDaCreare);
                 db.SaveChanges();
-
-                return RedirectToAction("Index");
             }
+
+            return RedirectToAction("Index");
         }
 
         //---------------------DETTAGLI---------------------------------
@@ -85,8 +85,6 @@ namespace MusicStore.Controllers
                     .Where(strumento => strumento.Id == id)
                     .Include(strumento => strumento.Categoria)
                     .FirstOrDefault();
-
-
             }
 
             if (SmFound != null)
