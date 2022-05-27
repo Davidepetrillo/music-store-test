@@ -59,7 +59,7 @@ namespace MusicStore.Controllers
 
 
         [HttpGet]
-        public IActionResult Dettagli(int id)
+        public IActionResult Details(int id)
         {
 
 
@@ -86,7 +86,7 @@ namespace MusicStore.Controllers
 
 
             [HttpGet]
-            public IActionResult Modifica(int id)
+            public IActionResult Update(int id)
             {
 
 
