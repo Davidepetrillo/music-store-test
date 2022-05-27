@@ -82,6 +82,8 @@ namespace MusicStore.Controllers
                 return NotFound("Lo Strumento Musicale  con id " + id + " non è stato trovato");
             }
 
+        }
+
 
             [HttpGet]
             public IActionResult Modifica(int id)
@@ -100,15 +102,13 @@ namespace MusicStore.Controllers
 
                 if (SmFound != null)
                 {
-                    return View("ModificaADMIN", SmFound);
+                    return View("Update", SmFound);
                 }
                 else
                 {
                     return NotFound("Lo Strumento Musicale  con id " + id + " non è stato trovato");
                 }
 
-
             }
-}
-        }
+    }
 }
