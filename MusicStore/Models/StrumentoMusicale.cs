@@ -24,11 +24,25 @@ namespace MusicStore.Models
         [Range(20, 10000, ErrorMessage = "Lo strumento non puo' costare meno di 20 euro")]
         public double Prezzo { get; set; }
 
-
+        [Required(ErrorMessage = "Campo obbligatorio")]
+        [Range(1, 50, ErrorMessage ="Il massimo numero di strumenti e' 50")]
         public int QuantitaStrumento { get; set; }
 
-
         public int NumeroLike { get; set; }
+
+        //-------------Relazione DB-------------
+        public Categoria Categoria { get; set; }
+
+        public int CategoriaId { get; set; }
+
+        public Utente Utente { get; set; }
+
+        public int UtenteId { get; set; }
+
+        public Fornitore Fornitore { get; set; }
+
+        public int FornitoreId { get; set; }
+        //---------------------------------------
 
         public StrumentoMusicale()
         {
