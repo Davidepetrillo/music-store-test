@@ -1,4 +1,4 @@
-﻿@model StrumentoMusicale
+﻿@model CategoriaStrumento
 
 <div class="container">
     <div class="row">
@@ -10,36 +10,36 @@
                 @Html.AntiForgeryToken()
                 <div class="mb-3">
                     <strong>Immagine:</strong>
-                    <input asp-for="Foto" class="d-block w-100" />
-                    <span asp-validation-for="Foto" class="text-danger"></span>
+                    <input asp-for="StrumentiMusicali.Foto" class="d-block w-100" />
+                    <span asp-validation-for="StrumentiMusicali.Foto" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <strong>Titolo:</strong>
-                    <input asp-for="Nome" class="d-block w-100" />
-                    <span asp-validation-for="Nome" class="text-danger"></span>
+                    <input asp-for="StrumentiMusicali.Nome" class="d-block w-100" />
+                    <span asp-validation-for="StrumentiMusicali.Nome" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <strong>Contenuto:</strong>
-                    <textarea asp-for="Descrizione" rows="10" class="d-block w-100"></textarea>
-                    <span asp-validation-for="Descrizione" class="text-danger"></span>
+                    <textarea asp-for="StrumentiMusicali.Descrizione" rows="10" class="d-block w-100"></textarea>
+                    <span asp-validation-for="StrumentiMusicali.Descrizione" class="text-danger"></span>
                 </div>
                  <div class="mb-3">
                     <strong>Prezzo:</strong>
-                    <input asp-for="Prezzo" class="d-block w-10" />
-                    <span asp-validation-for="Prezzo" class="text-danger"></span>
+                    <input asp-for="StrumentiMusicali.Prezzo" class="d-block w-10" />
+                    <span asp-validation-for="StrumentiMusicali.Prezzo" class="text-danger"></span>
                 </div>
                  <div class="mb-3">
                     <strong>Quantita:</strong>
-                    <input type="number" asp-for="QuantitaStrumento" class="d-block w-5" />
-                    <span asp-validation-for="QuantitaStrumento" class="text-danger"></span>
+                    <input type="number" asp-for="StrumentiMusicali.QuantitaStrumento" class="d-block w-5" />
+                    <span asp-validation-for="StrumentiMusicali.QuantitaStrumento" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <strong>Categoria:</strong>
-                    <select asp-for="CategoriaId" class="form-select" aria-label="Default select example">
+                    <select asp-for="StrumentiMusicali.CategoriaId" class="form-select" aria-label="Default select example">
                         <option selected>Seleziona una categoria</option>
-                        @foreach(StrumentoMusicale category in Model.Categoria)
+                        @foreach(Categoria category in Model.Categorie)
                         {
-                            <option value="@category.Id">@category.Title</option>
+                            <option value="@category.Id">@category.nomeCategoria</option>
                         } 
                     </select>
                 </div>
