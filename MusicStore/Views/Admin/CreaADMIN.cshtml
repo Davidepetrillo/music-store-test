@@ -9,23 +9,28 @@
                 @Html.AntiForgeryToken()
                 <div class="mb-3">
                     <strong>Immagine:</strong>
-                    <input asp-for="img" class="d-block w-100" />
-                    <span asp-validation-for="img" class="text-danger"></span>
+                    <input asp-for="Foto" class="d-block w-100" />
+                    <span asp-validation-for="Foto" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <strong>Titolo:</strong>
-                    <input asp-for="nome" class="d-block w-100" />
-                    <span asp-validation-for="nome" class="text-danger"></span>
+                    <input asp-for="Nome" class="d-block w-100" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <strong>Contenuto:</strong>
-                    <textarea asp-for="descrizione" rows="10" class="d-block w-100"></textarea>
-                    <span asp-validation-for="descrizione" class="text-danger"></span>
+                    <textarea asp-for="Descrizione" rows="10" class="d-block w-100"></textarea>
+                    <span asp-validation-for="Descrizione" class="text-danger"></span>
                 </div>
                  <div class="mb-3">
                     <strong>Prezzo:</strong>
-                    <input asp-for="prezzo" class="d-block w-10" />
-                    <span asp-validation-for="prezzo" class="text-danger"></span>
+                    <input asp-for="Prezzo" class="d-block w-10" />
+                    <span asp-validation-for="Prezzo" class="text-danger"></span>
+                </div>
+                 <div class="mb-3">
+                    <strong>Quantita:</strong>
+                    <input type="number" asp-for="QuantitaStrumento" class="d-block w-5" />
+                    <span asp-validation-for="QuantitaStrumento" class="text-danger"></span>
                 </div>
                 <div class="text-end">
                     <input type="submit" class="btn btn-small btn-success" value="Salva">
