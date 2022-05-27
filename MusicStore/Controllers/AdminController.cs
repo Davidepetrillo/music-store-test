@@ -133,7 +133,6 @@ namespace MusicStore.Controllers
                 }
             }
         }
-
         //---------------------------ELIMINA-----------------------------------
         [HttpPost]
         public IActionResult Delete(int id)
