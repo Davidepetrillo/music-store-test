@@ -25,6 +25,16 @@
                 <strong>Quantità:</strong>
                 @Model.QuantitaStrumento
             </p>
+            <p>
+            <strong>Categoria:</strong>
+                @if(Model.Categoria != null)
+                {
+                    <span>@Model.Categoria.nomeCategoria</span>
+                }else
+                {
+                    <span>Nessuna Categoria Associata</span>
+                }
+            </p>
         </div>
     </div>
 </div>

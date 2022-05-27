@@ -36,7 +36,7 @@
                 <div class="mb-3">
                     <strong>Categoria:</strong>
                     <select asp-for="StrumentiMusicali.CategoriaId" class="form-select" aria-label="Default select example">
-                        <option selected>Seleziona una categoria</option>
+                        <option value="">Seleziona una categoria</option>
                         @foreach(Categoria category in Model.Categorie)
                         {
                             <option value="@category.Id">@category.nomeCategoria</option>

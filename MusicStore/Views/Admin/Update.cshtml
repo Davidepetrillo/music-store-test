@@ -1,30 +1,40 @@
-﻿@model StrumentoMusicale
+﻿@model CategoriaStrumento
 <div class="container" style="padding-top: 65px">
     <div class="d-flex align-items-center">
         <h1 class="mt-3 mb-3">Modifica lo Strumento Musicale </h1>
     </div>
 
-    <form asp-controller="Admin" asp-action="Update" asp-route-id="@Model.Id" method="post" autocomplete="off">
+    <form asp-controller="Admin" asp-action="Update" asp-route-id="@Model.StrumentiMusicali.Id" method="post" autocomplete="off">
         @Html.AntiForgeryToken()
         <div class="form-outline">
-            <input asp-for="Foto" type="url" class="form-control" />
+            <input asp-for="StrumentiMusicali.Foto" type="url" class="form-control" />
             <label class="form-label" for="Immagine"> Foto </label>
         </div>
 
         <div class="form-outline">
-            <input asp-for="Nome" type="text" class="form-control" />
+            <input asp-for="StrumentiMusicali.Nome" type="text" class="form-control" />
             <label class="form-label" for="Nome">Nome </label>
         </div>
 
         <div class="form-outline mb-4">
-        <textarea asp-for="Descrizione" rows="10" class="form-control"></textarea>
+        <textarea asp-for="StrumentiMusicali.Descrizione" rows="10" class="form-control"></textarea>
         <label class="form-label" for="Descrizione">Descrizione</label>
         </div>
 
         <div class="form-outline mb-4">
-        <input asp-for="Prezzo" type="number" min="1" step="any" class="form-control" />
-        <label class="form-label" for="Prezzo">Prezzo</label>
- 
+            <input asp-for="StrumentiMusicali.Prezzo" type="number" min="1" step="any" class="form-control" />
+            <label class="form-label" for="Prezzo">Prezzo</label>
+        </div>
+         <div class="mb-3">
+            <strong>Categoria:</strong>
+                <select asp-for="StrumentiMusicali.CategoriaId" class="form-select" aria-label="Default select example">
+                <option value="">Seleziona la categoria</option>
+                @foreach(Categoria category in Model.Categorie)
+                {
+                    <option value="@category.Id">@category.nomeCategoria</option>
+                } 
+                </select>
+         </div>
         <button type="submit" class="btn btn-primary btn-block mb-4"> Modifica </button>
     </form>
 
