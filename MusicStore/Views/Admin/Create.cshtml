@@ -1,11 +1,12 @@
 ﻿@model StrumentoMusicale
+
 <div class="container">
     <div class="row">
         <div class="col-12">
             <div class="d-flex align-items-center">
                 <h1 class="mt-3 mb-3">Nuovo Viaggio</h1>
             </div>
-            <form action="@Url.Action("Create", "StrumentoMusicale")" method="post">
+            <form action="@Url.Action("Create", "Admin")" method="post">
                 @Html.AntiForgeryToken()
                 <div class="mb-3">
                     <strong>Immagine:</strong>
@@ -31,6 +32,16 @@
                     <strong>Quantita:</strong>
                     <input type="number" asp-for="QuantitaStrumento" class="d-block w-5" />
                     <span asp-validation-for="QuantitaStrumento" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <strong>Categoria:</strong>
+                    <select asp-for="CategoriaId" class="form-select" aria-label="Default select example">
+                        <option selected>Seleziona una categoria</option>
+                        @foreach(StrumentoMusicale category in Model.Categoria)
+                        {
+                            <option value="@category.Id">@category.Title</option>
+                        } 
+                    </select>
                 </div>
                 <div class="text-end">
                     <input type="submit" class="btn btn-small btn-success" value="Salva">
