@@ -8,7 +8,7 @@ namespace MusicStore.Controllers
     public class AdminController : Controller
     {
         [HttpGet]
-        public IActionResult Index() 
+        public IActionResult Index()
         {
 
             using (MusicContext db = new MusicContext())

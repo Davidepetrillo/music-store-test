@@ -35,9 +35,7 @@ namespace MusicStore.Models
 
         public int CategoriaId { get; set; }
 
-        public Utente Utente { get; set; }
-
-        public int UtenteId { get; set; }
+        List<Utente> ListaUtente { get; set; }
 
         public Fornitore Fornitore { get; set; }
 

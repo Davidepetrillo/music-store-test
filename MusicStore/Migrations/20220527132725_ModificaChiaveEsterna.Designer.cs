@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicStore.Data;
 
@@ -11,9 +12,10 @@ using MusicStore.Data;
 namespace MusicStore.Migrations
 {
     [DbContext(typeof(MusicContext))]
-    partial class MusicContextModelSnapshot : ModelSnapshot
+    [Migration("20220527132725_ModificaChiaveEsterna")]
+    partial class ModificaChiaveEsterna
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,11 +102,16 @@ namespace MusicStore.Migrations
                     b.Property<int>("QuantitaStrumento")
                         .HasColumnType("int");
 
+                    b.Property<int>("UtenteId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoriaId");
 
                     b.HasIndex("FornitoreId");
+
+                    b.HasIndex("UtenteId");
 
                     b.ToTable("StrumentoMusicale");
                 });
@@ -125,15 +132,10 @@ namespace MusicStore.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("Quantità")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StrumentoMusicaleId")
+                    b.Property<int>("quantità")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StrumentoMusicaleId");
 
                     b.ToTable("Utente");
                 });
@@ -152,20 +154,17 @@ namespace MusicStore.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Categoria");
-
-                    b.Navigation("Fornitore");
-                });
-
-            modelBuilder.Entity("MusicStore.Models.Utente", b =>
-                {
-                    b.HasOne("MusicStore.Models.StrumentoMusicale", "StrumentoMusicale")
-                        .WithMany()
-                        .HasForeignKey("StrumentoMusicaleId")
+                    b.HasOne("MusicStore.Models.Utente", "Utente")
+                        .WithMany("StrumentiMusicaliUtente")
+                        .HasForeignKey("UtenteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("StrumentoMusicale");
+                    b.Navigation("Categoria");
+
+                    b.Navigation("Fornitore");
+
+                    b.Navigation("Utente");
                 });
 
             modelBuilder.Entity("MusicStore.Models.Categoria", b =>
@@ -176,6 +175,11 @@ namespace MusicStore.Migrations
             modelBuilder.Entity("MusicStore.Models.Fornitore", b =>
                 {
                     b.Navigation("StrumentiMusicaliFornitore");
+                });
+
+            modelBuilder.Entity("MusicStore.Models.Utente", b =>
+                {
+                    b.Navigation("StrumentiMusicaliUtente");
                 });
 #pragma warning restore 612, 618
         }
