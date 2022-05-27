@@ -7,7 +7,7 @@ namespace MusicStore.Controllers
     public class StrumentoMusicaleController : Controller
     {
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index() 
         {
 
             using (MusicContext db = new MusicContext())
