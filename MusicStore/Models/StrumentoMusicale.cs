@@ -28,12 +28,12 @@ namespace MusicStore.Models
         [Range(1, 50, ErrorMessage ="Il massimo numero di strumenti e' 50")]
         public int QuantitaStrumento { get; set; }
 
-        public int NumeroLike { get; set; }
+        public int? NumeroLike { get; set; }
 
         //-------------Relazione DB-------------
-        public Categoria Categoria { get; set; }
+        public Categoria? Categoria { get; set; }
 
-        public int CategoriaId { get; set; }
+        public int? CategoriaId { get; set; }
 
         //---------------------------------------
 
