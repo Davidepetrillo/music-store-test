@@ -52,5 +52,37 @@ namespace MusicStore.Controllers
             return RedirectToAction("Index");
         }
 
+
+
+        //---------------------DETTAGLI---------------------------------
+
+
+        [HttpGet]
+        public IActionResult Dettagli(int id)
+        {
+
+
+            StrumentoMusicale? SmFound = null;
+            using (MusicContext db = new MusicContext())
+            {
+                SmFound = db.StrumentoMusicale
+                    .Where(StrumentoMusicale => StrumentoMusicale.Id == id)
+                    .FirstOrDefault();
+
+
+            }
+
+            if (SmFound != null)
+            {
+                return View("DettagliADMIN", SmFound);
+            }
+            else
+            {
+                return NotFound("Lo Strumento Musicale  con id " + id + " non è stato trovato");
+            }
+        }
+
+
+
     }
 }
