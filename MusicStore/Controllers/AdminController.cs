@@ -14,7 +14,7 @@ namespace MusicStore.Controllers
 
             using (MusicContext db = new MusicContext())
             {
-               strumentiMusicali = db.StrumentoMusicale.ToList<StrumentoMusicale>();   
+               strumentiMusicali = db.StrumentoMusicale.Include(strumento => strumento.Categoria).ToList<StrumentoMusicale>();   
             }
             return View("Index", strumentiMusicali);
 
