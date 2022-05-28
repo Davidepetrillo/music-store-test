@@ -35,14 +35,9 @@
                 </div>
                 <div class="mb-3">
                     <strong>Categoria:</strong>
+                    <textarea asp-for="StrumentiMusicali.CategoriaId" rows="10" class="d-block w-100"></textarea>
+                    <span asp-validation-for="StrumentiMusicali.CategoriaId" class="text-danger"></span>
                     
-                 <!select  asp-for="StrumentiMusicali.CategoriaId"  class="form-select" aria-label="Default select example">
-                       <option selected>Seleziona una categoria</option>
-                        @foreach(Categoria category in Model.Categorie)
-                        {
-                            <option value="@category.Id">@category.nomeCategoria</option>
-                        } 
-                    </!select>
                 </div>
                 <div class="text-end">
                     <input type="submit" class="btn btn-small btn-success" value="Salva">
