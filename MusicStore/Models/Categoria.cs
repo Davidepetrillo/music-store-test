@@ -20,5 +20,10 @@ namespace MusicStore.Models
 
         }
 
+        public Categoria(string nomeCategoria)
+        {
+            this.nomeCategoria = nomeCategoria;
+        }
+
     }
 }

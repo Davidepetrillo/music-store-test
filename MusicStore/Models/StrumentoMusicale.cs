@@ -39,7 +39,7 @@ namespace MusicStore.Models
 
         public StrumentoMusicale()
         {
-
+            
         }
 
         public StrumentoMusicale(string nome, string descrizione, string foto, double prezzo, int quantitaStrumento)

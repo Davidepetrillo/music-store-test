@@ -13,8 +13,8 @@ namespace MusicStore.Controllers
 
             using (MusicContext db = new MusicContext())
             {
-                List<StrumentoMusicale> strumentiMusicali = new List<StrumentoMusicale>();
-                strumentiMusicali = db.StrumentoMusicale.ToList();
+                List<StrumentoMusicale> strumentiMusicali = db.StrumentoMusicale.ToList();
+                List<Categoria> categorie = db.Categoria.ToList();
 
                 return View("Index", strumentiMusicali);
             }
@@ -46,13 +46,13 @@ namespace MusicStore.Controllers
             if (!ModelState.IsValid)
             {
                 using (MusicContext db = new MusicContext())
-                {
-                    List<Categoria> categories = db.Categoria.ToList();
+                { 
+                    nuovoStrumentoMusicale.Categorie = db.Categoria.ToList();
 
-                    nuovoStrumentoMusicale.Categorie = categories;
+                    return View("Create", nuovoStrumentoMusicale);
+
                 }
-
-                return View("Create", nuovoStrumentoMusicale);
+                
             }
 
             using (MusicContext db = new MusicContext())
