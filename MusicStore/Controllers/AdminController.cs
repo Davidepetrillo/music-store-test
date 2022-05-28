@@ -10,14 +10,13 @@ namespace MusicStore.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            List<StrumentoMusicale> strumentiMusicali = new List<StrumentoMusicale>();
 
             using (MusicContext db = new MusicContext())
             {
-                List<StrumentoMusicale> strumentiMusicali = db.StrumentoMusicale.ToList();
-                List<Categoria> categorie = db.Categoria.ToList();
-
-                return View("Index", strumentiMusicali);
+               strumentiMusicali = db.StrumentoMusicale.ToList<StrumentoMusicale>();   
             }
+            return View("Index", strumentiMusicali);
 
         }
 
