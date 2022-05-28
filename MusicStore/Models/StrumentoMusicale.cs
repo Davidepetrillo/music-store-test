@@ -49,6 +49,7 @@ namespace MusicStore.Models
             this.Foto = foto;
             this.Prezzo = prezzo;
             this.QuantitaStrumento = quantitaStrumento;
+           
         }
     }
 }
