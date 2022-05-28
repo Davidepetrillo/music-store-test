@@ -15,7 +15,7 @@ namespace MusicStore.Controllers
             {
                 List<StrumentoMusicale> strumentiMusicali = db.StrumentoMusicale.ToList();
                 List<Categoria> categorie = db.Categoria.ToList();
-                
+               
                 return View("Index", strumentiMusicali);
             }
 
