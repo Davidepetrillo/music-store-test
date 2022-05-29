@@ -3,3 +3,25 @@
     height: 20vw;
     object-fit: cover;
 }
+
+#search_struments {
+    border-radius: 15px;
+}
+
+a {
+    text-decoration: none;
+    text-decoration-color: unset;
+}
+
+#dettagliStrumento {
+    color: black;
+}
+
+.row3 {
+    font-size: small;
+    color: rgb(155, 153, 153);
+    font-weight: 500
+}
+.centre {
+    text-align: center;
+}

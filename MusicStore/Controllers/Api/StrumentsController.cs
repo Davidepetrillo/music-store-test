@@ -12,7 +12,7 @@ namespace MusicStore.Controllers.Api
     {
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult Get(string? searchString)
+        public IActionResult Get(string? searchString, int? id)
         {
             List<StrumentoMusicale> struments = new List<StrumentoMusicale>();
 
@@ -27,7 +27,13 @@ namespace MusicStore.Controllers.Api
                     || strument.Categoria.nomeCategoria.Contains(searchString))
                     .ToList<StrumentoMusicale>();
                 }
-                else
+                else if (id != null)
+                {
+                        StrumentoMusicale dettaglioStrumento = context.StrumentoMusicale
+                        .Where(viaggio => viaggio.Id == id)
+                        .First();
+                        return Ok(dettaglioStrumento);
+                } else
                 {
                     struments = context.StrumentoMusicale.ToList<StrumentoMusicale>();
                 }

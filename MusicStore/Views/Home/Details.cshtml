@@ -1,0 +1,68 @@
+﻿@model StrumentoMusicale
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+            <h1 class="col text-center mt-5 fw-bold">Music Store</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <blockquote class="col-8 text-center text-muted">“Per me la musica è il colore. Non il dipinto. La mia musica mi permette di dipingere me stesso.”</blockquote>
+        </div>
+        <div class="row">
+                <div class="col centre row3">- David Bowie</div>
+            </div>
+      </div>
+      <div id="details_instruments">
+
+      </div>
+
+        @section Scripts {
+
+        <script type="text/javascript">
+        
+            detailsInstruments();
+
+            function detailsInstruments(){
+
+           // var url = window.location.pathname;
+           // var id = url.substring(url.lastIndexOf('/') + 1);
+           var id = @Model.Id
+
+                axios.get('/api/Struments/Get?id=' + id).then((result) => {
+
+                        document.getElementById("details_instruments").innerHTML = 
+                        `
+                         <div class="container pic">
+                            <div class="row p-3">
+                                <div class="col-6"><img src="${result.data.foto}" alt=""></div>
+                            </div>
+                        </div>
+   
+                        <div class="container desc">
+
+                            <div class="row">
+                               <div class="col-6 profilo title">${result.data.nome}</div>
+                            </div>
+            
+                            <div class="row">
+                                <div class="col-6 profilo lengthPrice">${result.data.prezzo}</div>
+                            </div>
+           
+                            <div class="row">
+                                <div class="col-6 profilo description">${result.data.descrizione}</div>
+                            </div>
+
+                        </div>
+                        `
+                
+                    
+                    }).catch((error) => {
+                        console.log("C'è stato un errore: " + error);
+
+                    })
+               }
+
+        </script>
+
+        }
