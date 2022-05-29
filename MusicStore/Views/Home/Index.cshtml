@@ -1,4 +1,18 @@
-﻿<!--Sezione Strumenti-->  
+﻿<!--Intestazione-->
+<div class="container mt-3 mb-2">
+    <div class="row text-center">
+        <div class="col-12">
+            <h1>Strumenti musicali</h1>
+        </div>
+        <div class="col-12">
+            <input id="search_struments" class="border border-3 border-dark" type="text" placeholder="Cerca Viaggio">
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Sezione Strumenti-->  
 <section>
     <div class="container mt-3 mb-3">
         <h1 class="text-center text-uppercase mx-5">Strumenti Musicali</h1>
@@ -19,19 +33,33 @@
 
 <!--Sezione degli Scripts-->
 @section Scripts  {
-    <script type="text/javascript">
+<script type="text/javascript">
+
+//Aggiungiamo evento di keyup richiamando la funzione di ricerca della stringa
+document.getElementById('search_struments').addEventListener('keyup', searchParameter);
+
+searchParameter();
     
-loadStrument();
-    
+//Funzione che cerca la stringa in base al valore associato nella barra di ricerca
+//richiamando la funzione che carica le card degli strumenti
+function searchParameter() {
+    var inputOfSearch = document.getElementById('search_struments').value;
+    loadStrument(inputOfSearch);
+}
+
 //Funzione che carica le card dei viaggi tramite axios
-function loadStrument() {
+function loadStrument(parameter) {
 
     document.getElementById('struments_output').innerHTML = '';
     
-    axios.get('/api/Struments/Get').then((result) => {
+    axios.get('/api/Struments/Get', {
+        params: {
+            searchString : parameter
+        }
+    }).then((result) => {
         console.log(result);
 
-        if (result.data.lenght <= 0) 
+        if (result.data.lenght == 0) 
         {
             document.getElementById('wait_struments').classList.add('d-none');
         } 
@@ -62,5 +90,5 @@ function loadStrument() {
     });
 }
     
-    </script>
+</script>
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MusicStore.Data;
 using MusicStore.Models;
 
@@ -11,15 +12,24 @@ namespace MusicStore.Controllers.Api
     {
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult Get()
+        public IActionResult Get(string? searchString)
         {
             List<StrumentoMusicale> struments = new List<StrumentoMusicale>();
 
             using (MusicContext context = new MusicContext())
             {
-                struments = context.StrumentoMusicale
+                if (searchString != null && searchString != "")
+                {
+                    struments = context.StrumentoMusicale
+                    .Where(strument => strument.Nome.Contains(searchString)
+                    || strument.Descrizione.Contains(searchString))
                     .ToList<StrumentoMusicale>();
-
+                }
+                else
+                {
+                    struments = context.StrumentoMusicale.ToList<StrumentoMusicale>();
+                }
+                
                 return Ok(struments);
             }
         }
