@@ -17,11 +17,65 @@ a {
     color: black;
 }
 
+
+
+
+/*-----------------------------------------------------*/
+
+
+
+
+header {
+    margin-bottom: 35px;
+}
+
+.centre {
+    text-align: center;
+}
+
+.row1 {
+    font-weight: bold;
+    font-size: xx-large;
+    color: rgb(5, 161, 122);
+    margin-bottom: 1%;
+}
+
+.row2 {
+    font-weight: 600;
+}
+
 .row3 {
     font-size: small;
     color: rgb(155, 153, 153);
     font-weight: 500
 }
-.centre {
+
+/* style alle immagini */
+
+
+.pic {
+    margin-bottom: 25px;
+}
+
+/* style alla descrizione dei membri */
+
+.profilo {
     text-align: center;
+}
+
+.name {
+    font-weight: 500;
+    color: rgb(5, 161, 122);
+    font-size: larger;
+}
+
+.job {
+    font-weight: 600;
+    color: rgb(128, 127, 127);
+    margin-bottom: 1.5%;
+}
+
+.description {
+    font-weight: 500;
+    margin-bottom: 5%;
 }

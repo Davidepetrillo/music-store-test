@@ -35,5 +35,10 @@ namespace MusicStore.Controllers
             }
         }
 
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+
     }
 }
