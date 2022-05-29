@@ -21,8 +21,10 @@ namespace MusicStore.Controllers.Api
                 if (searchString != null && searchString != "")
                 {
                     struments = context.StrumentoMusicale
+                    .Include(strument => strument.Categoria)
                     .Where(strument => strument.Nome.Contains(searchString)
-                    || strument.Descrizione.Contains(searchString))
+                    || strument.Descrizione.Contains(searchString) 
+                    || strument.Categoria.nomeCategoria.Contains(searchString))
                     .ToList<StrumentoMusicale>();
                 }
                 else
@@ -30,6 +32,7 @@ namespace MusicStore.Controllers.Api
                     struments = context.StrumentoMusicale.ToList<StrumentoMusicale>();
                 }
                 
+
                 return Ok(struments);
             }
         }

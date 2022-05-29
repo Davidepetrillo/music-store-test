@@ -1,15 +1,12 @@
 ﻿<!--Intestazione-->
-<div class="container mt-3 mb-2">
+<div class="container-fluid mt-3 mb-2">
     <div class="row text-center">
-        <div class="col-12">
-            <h1>Strumenti musicali</h1>
-        </div>
         <div class="col-12">
             <input id="search_struments" class="border border-3 border-dark" type="text" placeholder="Cerca Viaggio">
         </div>
-        </div>
     </div>
 </div>
+
 
 
 <!--Sezione Strumenti-->  
@@ -72,7 +69,7 @@ function loadStrument(parameter) {
                 
             document.getElementById('struments_output').innerHTML +=
             `
-                <div class="col-lg-4 col-md-6 col-xs-12  text-center">
+                <div class="col-lg-4 col-md-6 col-xs-12 text-center">
                     <div class="card my-3">
                         <img src="${strument.foto}" class="card-img-top" alt="Image">
                         <div class="card-body">
