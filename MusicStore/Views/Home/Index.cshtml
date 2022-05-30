@@ -12,7 +12,6 @@
 <!--Sezione Strumenti-->  
 <section>
     <div class="container mt-3 mb-3">
-        <h1 class="text-center text-uppercase mx-5">Strumenti Musicali</h1>
         <!--Pagina in attesa -->
         <div id="wait_struments" class="row text-center">
               <div class="text-center">
@@ -72,16 +71,21 @@ function loadStrument(parameter) {
             document.getElementById('struments_output').innerHTML +=
             `
                 <div class="col-lg-4 col-md-6 col-xs-12 text-center">
-                <a href="${urlDetails}">
-                    <div class="card my-3">
-                        <img src="${strument.foto}" class="img-fluid" alt="Image">
-                        <div id="dettagliStrumento" class="card-body">
-                            <h5 class="card-title">${strument.nome}</h5>
-                            <p class="card-text">${strument.descrizione}</p>
-                            <span class="btn btn-light text-dark border border-dark">Acquista</span>
+                    <a href="${urlDetails}">
+                        <div class="card my-3 border-0">
+                            <img src="${strument.foto}" class="img-fluid" alt="Image">
+                            <div id="dettagliStrumento" class="card-body">
+                                <h5 class="card-title">${strument.nome}</h5>
+                                <p class="card-text">${strument.descrizione}</p>                               
+                                <span class="btn btn-light text-dark border border-dark">Acquista</span>
+                            </div>
                         </div>
-                    </div>
                     </a>
+                    <div class="wrapper">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                     </div>
                 </div>
             `
             });
@@ -90,6 +94,27 @@ function loadStrument(parameter) {
     console.log(error);
     });
 }
-    
+
+var heartContainer = document.getElementsByClassName('icon-wrapper');
+
+Object.keys(heartContainer).forEach(singleElement => {
+
+    heartContainer[singleElement].addEventListener('click', function () {
+        if (heartContainer[singleElement].classList.contains('liked')) {
+            heartContainer[singleElement].classList.add('unliked');
+            heartContainer[singleElement].classList.remove('liked');
+            setTimeout(unlikeRemover, 250);
+        }
+        else {
+            heartContainer[singleElement].classList.add('liked');
+            heartContainer[singleElement].classList.remove('unliked');
+        }
+
+        function unlikeRemover() {
+            heartContainer[singleElement].classList.remove('unliked');
+        }
+    });
+
+});
 </script>
 }
