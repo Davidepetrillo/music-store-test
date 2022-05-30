@@ -30,7 +30,7 @@ namespace MusicStore.Controllers.Api
                 else if (id != null)
                 {
                         StrumentoMusicale dettaglioStrumento = context.StrumentoMusicale
-                        .Where(viaggio => viaggio.Id == id)
+                        .Where(strumento => strumento.Id == id)
                         .First();
                         return Ok(dettaglioStrumento);
                 } else
