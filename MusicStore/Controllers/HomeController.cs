@@ -12,6 +12,11 @@ namespace MusicStore.Controllers
             return View();
         }
 
+        public IActionResult Home()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Details(int id)
         {
