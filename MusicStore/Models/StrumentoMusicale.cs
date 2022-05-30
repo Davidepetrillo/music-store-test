@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace MusicStore.Models
 {
@@ -34,6 +35,9 @@ namespace MusicStore.Models
         public Categoria? Categoria { get; set; }
 
         public int? CategoriaId { get; set; }
+
+        [JsonIgnore]
+        public List<Rifornisci>? Rifornisci { get; set; }
 
         //---------------------------------------
 

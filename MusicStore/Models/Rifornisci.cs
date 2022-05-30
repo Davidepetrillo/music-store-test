@@ -9,23 +9,32 @@ namespace MusicStore.Models
         [Key]
         public int Id { get; set; }
 
-        public DateTime data { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime Data { get; set; }
+
+        [Required(ErrorMessage = "Campo obbligatorio")]
+        [StringLength(50, ErrorMessage = "Nome rifornitore maggiore di 50 parole")]
+        public string Nome { get; set; }
 
         [Required(ErrorMessage = "Campo obbligatorio")]
         [Range(1, 50, ErrorMessage = "Il massimo numero di strumenti e' 50")]
-        public int quantita { get; set; }
+        public int Quantita { get; set; }
 
         //----------
         [JsonIgnore]
-        public List<StrumentoMusicale> StrumentiMusicali { get; set; }
+        public StrumentoMusicale strumentoMusicale { get; set; }   
+        public int? StrumentoMusicaleId { get; set; }
         public Rifornisci()
         {
 
         }
-        public Rifornisci(int quantità,DateTime data)
+        public Rifornisci(int quantita, string nome)
         {
-            this.data = data;
-            data=DateTime.Now;
+            Quantita = quantita;
+            Data=DateTime.Now;
+            Nome = nome;
+
         }
     }
 }
