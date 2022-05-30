@@ -1,31 +1,31 @@
 ﻿@model StrumentoMusicale
 
-<div class="container">
+<div class="container justify-content-center">
     <div class="row">
         <div class="col-12">
             <div class="d-flex align-items-center">
                 <h1 class="mt-3 mb-3">Dettagli Strumento</h1>
             </div>
             <div class="post-single-image-container">
-                <img src="@Model.Foto">
+                <img src="@Model.Foto" height="500" width="600">
             </div>
-            <p>
+            <h4>
                 <strong>Nome Strumento:</strong>
                 @Model.Nome
-            </p>
-            <p>
+            </h4>
+            <h4>
                 <strong>Contenuto:</strong>
                 @Model.Descrizione  
-            </p>
-             <p>
+            </h4>
+             <h4>
                 <strong>Prezzo:</strong>
-                @Model.Prezzo
-            </p>
-             <p>
+                @Model.Prezzo &euro;
+            </h4>
+             <h4>
                 <strong>Quantità:</strong>
                 @Model.QuantitaStrumento
-            </p>
-            <p>
+            </h4>
+            <h4>
             <strong>Categoria:</strong>
                 @if(Model.Categoria != null)
                 {
@@ -34,7 +34,7 @@
                 {
                     <span>Nessuna Categoria Associata</span>
                 }
-            </p>
+            </h4>
         </div>
     </div>
 </div>
