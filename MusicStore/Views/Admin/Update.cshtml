@@ -25,6 +25,11 @@
             <input asp-for="StrumentiMusicali.Prezzo" type="number" min="1" step="any" class="form-control" />
             <label class="form-label" for="Prezzo">Prezzo</label>
         </div>
+        <div class="mb-3">
+                    <strong>Quantita:</strong>
+                    <input type="number" min="1" max="10" asp-for="StrumentiMusicali.QuantitaStrumento" class="d-block w-5" />
+                    <span asp-validation-for="StrumentiMusicali.QuantitaStrumento" class="text-danger"></span>
+                </div>
          <div class="mb-3">
             <strong>Categoria:</strong>
                 <select asp-for="StrumentiMusicali.CategoriaId" class="form-select" aria-label="Default select example">
