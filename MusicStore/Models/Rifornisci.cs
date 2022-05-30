@@ -9,7 +9,7 @@ namespace MusicStore.Models
         [Key]
         public int Id { get; set; }
 
-        DateTime data;
+        public DateTime data { get; set; }
 
         [Required(ErrorMessage = "Campo obbligatorio")]
         [Range(1, 50, ErrorMessage = "Il massimo numero di strumenti e' 50")]
