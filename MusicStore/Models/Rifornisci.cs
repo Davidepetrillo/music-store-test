@@ -10,9 +10,8 @@ namespace MusicStore.Models
 
         DateTime data;
 
-        [Required(ErrorMessage = "Il campo è obbligatorio")]
-        [StringLength(50, ErrorMessage = "Il nome della categoria non può superare i 50 caratteri")]
-        
+        [Required(ErrorMessage = "Campo obbligatorio")]
+        [Range(1, 50, ErrorMessage = "Il massimo numero di strumenti e' 50")]
         public int quantita { get; set; }
 
         public Rifornisci()
