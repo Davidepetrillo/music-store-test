@@ -16,6 +16,11 @@ namespace MusicStore.Models
         [Required(ErrorMessage = "Campo obbligatorio")]
         public int Quantita { get; set; }
 
+        //----------
+
+        public StrumentoMusicale strumentoMusicale { get; set; }
+        public int? StrumentoMusicaleId { get; set; }
+
 
 
         public Acquista(int quantita)
