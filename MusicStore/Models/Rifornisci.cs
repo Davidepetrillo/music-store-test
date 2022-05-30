@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace MusicStore.Models
 {
@@ -14,6 +15,9 @@ namespace MusicStore.Models
         [Range(1, 50, ErrorMessage = "Il massimo numero di strumenti e' 50")]
         public int quantita { get; set; }
 
+        //----------
+        [JsonIgnore]
+        public List<StrumentoMusicale> StrumentiMusicali { get; set; }
         public Rifornisci()
         {
 
