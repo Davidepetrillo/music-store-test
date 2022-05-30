@@ -156,6 +156,7 @@ namespace MusicStore.Controllers
                     strumentoDaModificare.Descrizione = model.StrumentiMusicali.Descrizione;
                     strumentoDaModificare.Foto = model.StrumentiMusicali.Foto;
                     strumentoDaModificare.Prezzo = model.StrumentiMusicali.Prezzo;
+                    strumentoDaModificare.QuantitaStrumento = model.StrumentiMusicali.QuantitaStrumento;
                     strumentoDaModificare.CategoriaId = model.StrumentiMusicali.CategoriaId;
 
                     context.SaveChanges();
