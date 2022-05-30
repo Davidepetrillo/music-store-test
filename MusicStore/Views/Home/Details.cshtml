@@ -33,26 +33,16 @@
 
                         document.getElementById("details_instruments").innerHTML = 
                         `
-                         <div class="container pic">
-                            <div class="row p-3">
-                                <div class="col-6"><img src="${result.data.foto}" alt=""></div>
-                            </div>
-                        </div>
-   
-                        <div class="container desc">
-
-                            <div class="row">
-                               <div class="col-6 profilo title">${result.data.nome}</div>
-                            </div>
-            
-                            <div class="row">
-                                <div class="col-6 profilo lengthPrice">${result.data.prezzo}</div>
-                            </div>
-           
-                            <div class="row">
-                                <div class="col-6 profilo description">${result.data.descrizione}</div>
-                            </div>
-
+                        <div class="col-lg-4 col-md-6 col-xs-12 text-center">
+                          
+                                <div class="card my-3">
+                                    <img src="${result.data.foto}" class="card-img-top" alt="Image">
+                                    <div id="dettagliStrumento" class="card-body">
+                                        <h5 class="card-title">${result.data.nome}</h5>
+                                        <p class="card-text">${result.data.descrizione}</p>
+                                        <span class="btn btn-light text-dark border border-dark">Acquista</span>
+                                    </div>
+                                </div>
                         </div>
                         `
                 
