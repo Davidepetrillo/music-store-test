@@ -23,8 +23,10 @@ namespace MusicStore.Models
 
         //----------
         
-        public StrumentoMusicale? strumentoMusicale { get; set; }   
+        public StrumentoMusicale strumentoMusicale { get; set; } 
+        
         public int? StrumentoMusicaleId { get; set; }
+
         public Rifornisci()
         {
 
