@@ -1,0 +1,61 @@
+﻿@model Rifornisci
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex align-items-center">
+                <h1 class="mt-3 mb-3">Rifornisci</h1>
+            </div>
+            <form action="@Url.Action("RifornisciArticolo", "Admin")" method="post">
+                @Html.AntiForgeryToken()
+                
+                <div class="mb-3">
+                    <strong>strumentoMusicaleId:</strong>
+                    <input asp-for="StrumentoMusicaleId" class="d-block w-100" />
+                    <span asp-validation-for="StrumentoMusicaleId" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <label for="start">Start date:</label>
+                    <input asp-for="Data" class="d-block w-100" />
+                    <span asp-validation-for="Data" class="text-danger"></span>
+                </div>
+                
+                
+                <div class="mb-3">
+                    <strong>Nome:</strong>
+                    <input asp-for="Nome" class="d-block w-100" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+                
+                 
+                 <div class="mb-3">
+                    <strong>Quantita:</strong>
+                    <input type="number" min="1" max="10" asp-for="Quantita" class="d-block w-5" />
+                    <span asp-validation-for="Quantita" class="text-danger"></span>
+                </div>
+                
+                <div class="text-end">
+                    <input type="submit" class="btn btn-small btn-success" value="Salva">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
