@@ -22,7 +22,7 @@ namespace MusicStore.Models
         public int Quantita { get; set; }
 
         //----------
-        [JsonIgnore]
+        
         public StrumentoMusicale strumentoMusicale { get; set; }   
         public int? StrumentoMusicaleId { get; set; }
         public Rifornisci()
