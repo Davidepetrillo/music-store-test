@@ -15,7 +15,7 @@ namespace MusicStore.Controllers.Api
             if (!ModelState.IsValid)
             {
 
-                return BadRequest("Lo strumento inviato non è corretto");
+                return UnprocessableEntity();
 
             } else
             {
