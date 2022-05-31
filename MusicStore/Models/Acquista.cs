@@ -25,12 +25,12 @@ namespace MusicStore.Models
         public Acquista()
         {
         }
-
+        /*
         public Acquista(int quantita)
         {
             Quantita = quantita;
             Data = DateTime.Now;
 
-        }
+        }*/
     }
 }
