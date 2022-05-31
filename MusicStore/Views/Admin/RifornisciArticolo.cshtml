@@ -11,33 +11,27 @@
             <form action="@Url.Action("RifornisciArticolo", "Admin")" method="post">
                 @Html.AntiForgeryToken()
                 
-                <div class="mb-3">
-                    <strong>strumentoMusicaleId:</strong>
-                    <input asp-for="StrumentoMusicaleId" class="d-block w-100" />
-                    <span asp-validation-for="StrumentoMusicaleId" class="text-danger"></span>
-                </div>
-
                 <div>
                     <label for="start">Start date:</label>
-                    <input asp-for="Data" class="d-block w-100" />
+                    <input asp-for="Data" class="d-block w-50" />
                     <span asp-validation-for="Data" class="text-danger"></span>
                 </div>
                 
                 
                 <div class="mb-3">
                     <strong>Nome:</strong>
-                    <input asp-for="Nome" class="d-block w-100" />
+                    <input asp-for="Nome" class="d-block w-50" />
                     <span asp-validation-for="Nome" class="text-danger"></span>
                 </div>
                 
                  
                  <div class="mb-3">
                     <strong>Quantita:</strong>
-                    <input type="number" min="1" max="10" asp-for="Quantita" class="d-block w-5" />
+                    <input type="number" min="1" max="50" asp-for="Quantita" class="d-block w-5" />
                     <span asp-validation-for="Quantita" class="text-danger"></span>
                 </div>
                 
-                <div class="text-end">
+                <div class="text-end mb-3">
                     <input type="submit" class="btn btn-small btn-success" value="Salva">
                 </div>
             </form>
