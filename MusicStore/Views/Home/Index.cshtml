@@ -7,7 +7,6 @@
     </div>
 </div>
 
-                       
 <!--Sezione Strumenti-->  
 <section>
     <div class="container mt-3 mb-3">
@@ -25,6 +24,7 @@
         </div>
     </div>
 </section>
+
 
 <!--Sezione degli Scripts-->
 @section Scripts  {
@@ -45,7 +45,6 @@ function searchParameter() {
 //Funzione che carica le card degli strumenti  tramite axios
 function loadStrument(parameter) {
 
-
     document.getElementById('struments_output').innerHTML = '';
     
     axios.get('/api/Struments/Get', {
@@ -64,45 +63,27 @@ function loadStrument(parameter) {
             document.getElementById('wait_struments').classList.add('d-none');
             document.getElementById('struments_output').classList.remove('d-none');
 
-<<<<<<< HEAD
-            result.data.forEach(strument => {
-                
-
-            var urlDetails = "/Home/Details/" + strument.id;
-
-            document.getElementById('struments_output').innerHTML +=
-            `
-
-                <div class="instrument_card col-lg-4 col-md-6 col-xs-12 text-center">
-             <button type="button" class="btn btn-outline-danger btLike icon-wrapper fas fa-heart onclick="likeHeart()"">&#10084;</button>
-                    <a href="${urlDetails}">
-=======
             result.data.forEach(strument => {   
 
             document.getElementById('struments_output').innerHTML +=
             `
                 <div class="col-lg-4 col-md-6 col-xs-12 text-center">
                     <a href="/Home/Details/${strument.id}">
->>>>>>> 82f55ebe892630b62a45437421d4939f18f26a8e
                         <div class="card my-3 border-0">
                             <img src="${strument.foto}" class="img-fluid" alt="Image">
                             <div id="dettagliStrumento" class="card-body">
                                 <h5 class="card-title">${strument.nome}</h5>
                                 <p class="card-text">${strument.descrizione}</p>                               
-                            </div>                           
+                                <span class="btn btn-light text-dark border border-dark">Acquista</span>
+                            </div>
                         </div>
                     </a>
-<<<<<<< HEAD
-                </div>
-                
-=======
                     <div class="wrapper">
                         <div class="icon-wrapper">
                             <i class="fas fa-heart"></i>
                         </div>
                      </div>
                 </div> 
->>>>>>> 82f55ebe892630b62a45437421d4939f18f26a8e
             `
             });
         }
@@ -110,13 +91,7 @@ function loadStrument(parameter) {
     console.log(error);
     });
 }
-<<<<<<< HEAD
-
-function likeHeart(){
-
-=======
 /*
->>>>>>> 82f55ebe892630b62a45437421d4939f18f26a8e
 var heartContainer = document.getElementsByClassName('icon-wrapper');
 
 Object.keys(heartContainer).forEach(singleElement => {
@@ -137,14 +112,6 @@ Object.keys(heartContainer).forEach(singleElement => {
         }
     });
 
-<<<<<<< HEAD
-});
-
-}
-
-
-=======
 });*/
->>>>>>> 82f55ebe892630b62a45437421d4939f18f26a8e
 </script>
 }
