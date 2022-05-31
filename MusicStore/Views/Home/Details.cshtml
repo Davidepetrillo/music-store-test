@@ -1,4 +1,4 @@
-﻿@model StrumentoMusicale
+﻿
 
     <div class="container">
         <div class="row">
@@ -17,19 +17,54 @@
 
       </div>
 
+
+      <form onsubmit="AcquistaStrumento(event)"  method="post">
+      <!-- data input -->
+        <div class="row p-2">
+
+            <div class="col-12">
+                <label for="Data">Data</label>
+                <input type="datetime-local" class="form-control" id="Data" placeholder="data">
+            </div>
+        </div>
+
+      <!-- Quantita input -->
+        <div class="row p-2">
+
+            <div class="col-12">
+                <label for="Quantita">Quantita</label>
+                <input type="number" class="form-control" id="Quantita" placeholder="Quantita">
+            </div>
+        </div>
+
+      
+      
+
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-primary btn-block mb-4">Acquista</button>
+    </form>
+
         @section Scripts {
 
         <script type="text/javascript">
-        
-            detailsInstruments();
+            var url = window.location.pathname;
+            var id = url.substring(url.lastIndexOf('/') + 1);
 
-            function detailsInstruments(){
 
-           // var url = window.location.pathname;
-           // var id = url.substring(url.lastIndexOf('/') + 1);
-           var id = @Model.Id
+            detailsInstruments(id);
 
-                axios.get('/api/Struments/Get?id=' + id).then((result) => {
+            
+
+            function detailsInstruments(id){
+
+            
+           
+
+                axios.get('/api/Struments/Get',{
+                    params : {
+                        id : id
+                    }
+                }).then((result) => {
 
                         document.getElementById("details_instruments").innerHTML = 
                         `
@@ -52,6 +87,35 @@
 
                     })
                }
+
+               function AcquistaStrumento(event){
+                   event.preventDefault();
+
+                   var Quantita = document.getElementById('Quantita').value;
+                   var Data = document.getElementById('Data').value;
+
+                   var nuovoAcquisto = {
+                       Data : Data,
+                       Quantita : Quantita,
+                       StrumentoMusicaleId : id
+                   }
+
+                   axios.post('api/Struments/Acquista', nuovoAcquisto
+                   ).then((result) => {
+                       var url = window.location.href;
+                        console.log(url)
+                        
+                        var home = url.substring(0, 22);
+                            console.log(home);
+
+                        window.location.assign(url);
+
+                   }).catch((error) => {
+                        console.log("Si è verificato un errore: " + error);
+                    })
+
+               }
+
 
         </script>
 

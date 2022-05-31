@@ -10,7 +10,7 @@ namespace MusicStore.Controllers.Api
     [ApiController]
     public class StrumentsController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet] 
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Get(string? searchString, int? id)
         {
@@ -40,6 +40,53 @@ namespace MusicStore.Controllers.Api
                 
 
                 return Ok(struments);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            using (MusicContext db = new MusicContext())
+            {
+                try
+                {
+                    StrumentoMusicale strumentoTrovato = db.StrumentoMusicale
+                        .Where(x => x.Id == id)
+                        .First();
+                    return Ok(strumentoTrovato);
+                }
+                catch (InvalidOperationException ex)
+                {
+                    return NotFound("Lo strumento musicale non è stato trovato");
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
+        }
+
+
+        [HttpPost]
+        public IActionResult AcquistaStrumento([FromBody] Acquista model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return UnprocessableEntity(ModelState);
+            }
+
+            using (MusicContext db = new MusicContext())
+            {
+                Acquista acquista = new Acquista();
+
+                
+                acquista.StrumentoMusicaleId = model.StrumentoMusicaleId;
+                acquista.Quantita = model.Quantita;
+                acquista.Data = model.Data;
+
+                db.Acquista.Add(acquista);
+                db.SaveChanges();
+                return Ok();
             }
         }
 
