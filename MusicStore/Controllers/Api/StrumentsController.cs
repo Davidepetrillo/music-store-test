@@ -32,10 +32,25 @@ namespace MusicStore.Controllers.Api
                     struments = context.StrumentoMusicale.ToList<StrumentoMusicale>();
                 }
 
-
                 return Ok(struments);
             }
         }
+
+      /*[HttpGet]
+        public IActionResult GetClassifica()
+        {
+            List<Acquista> acquistos = new List<Acquista>();
+
+            using(MusicContext context = new MusicContext())
+            {
+               IEnumerable<Acquista> acquistos = 
+                            from acquisto in Acquista
+                            where acquisto.Data between DATEADD(m, -1, GETDATE()) and GETDATE()
+                            group by Acquista.StrumentoMusicaleId
+                            ORDER BY SUM(Quantita) DESC;
+                            select TOP(5) StrumentoMusicaleId, SUM(Quantita)
+            }
+        }*/
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(StrumentoMusicale), StatusCodes.Status200OK)]
@@ -87,8 +102,6 @@ namespace MusicStore.Controllers.Api
                 return Ok();
             }
         }
-
-
 
     }
 }
