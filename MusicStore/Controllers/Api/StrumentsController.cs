@@ -42,8 +42,8 @@ namespace MusicStore.Controllers.Api
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Details(int id)
         {
-            //Troviamo l'id corrispondente al pacchetto con lo stesso id
-            //Ritorniamo quel pacchetto oppure NOTFOUND
+            //Troviamo l'id corrispondente allo strumento con lo stesso id
+            //Ritorniamo quello strumento oppure NOTFOUND
             using (MusicContext context = new MusicContext())
             {
                 StrumentoMusicale? strumentToFound = context.StrumentoMusicale
@@ -62,7 +62,7 @@ namespace MusicStore.Controllers.Api
         [HttpPost("{id}")]
         [ProducesResponseType(typeof(Acquista), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult AcquistaStrumento([FromBody] Acquista model)
+        public IActionResult AcquistaStrumento([FromBody] Acquista model, int id)
         {
             if (!ModelState.IsValid)
             {
@@ -71,12 +71,16 @@ namespace MusicStore.Controllers.Api
 
             using (MusicContext db = new MusicContext())
             {
-                Acquista acquista = new Acquista();
+                StrumentoMusicale smFound = db.StrumentoMusicale
+                    .Where(strumento => strumento.Id == id)
+                    .FirstOrDefault();
 
+                Acquista acquista = new Acquista();
                 
                 acquista.StrumentoMusicaleId = model.StrumentoMusicaleId;
-                acquista.Quantita -= model.Quantita;
+                acquista.Quantita = model.Quantita;
                 acquista.Data = model.Data;
+                smFound.QuantitaStrumento -= model.Quantita;
 
                 db.Add(acquista);
                 db.SaveChanges();
