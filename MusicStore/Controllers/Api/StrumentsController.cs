@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MusicStore.Data;
 using MusicStore.Models;
+using System.Linq;
 
 namespace MusicStore.Controllers.Api
 {
@@ -36,21 +37,23 @@ namespace MusicStore.Controllers.Api
             }
         }
 
-      /*[HttpGet]
+        [HttpGet]
         public IActionResult GetClassifica()
         {
             List<Acquista> acquistos = new List<Acquista>();
 
             using(MusicContext context = new MusicContext())
             {
-               IEnumerable<Acquista> acquistos = 
-                            from acquisto in Acquista
-                            where acquisto.Data between DATEADD(m, -1, GETDATE()) and GETDATE()
-                            group by Acquista.StrumentoMusicaleId
-                            ORDER BY SUM(Quantita) DESC;
-                            select TOP(5) StrumentoMusicaleId, SUM(Quantita)
+                acquistos = context.Acquista
+                    .Include(buy => buy.strumentoMusicale)
+                    .Where(buy => buy.Data >= buy.Data.AddMonths(-1))
+                    .GroupBy(buy => buy.strumentoMusicale.Nome)
+                    .OrderBy(buy => buy.Sum(s => s.Quantita))
+                    .SelectMany(g => g.Take(5)).ToList();
+
+                return Ok(acquistos);
             }
-        }*/
+        }
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(StrumentoMusicale), StatusCodes.Status200OK)]
