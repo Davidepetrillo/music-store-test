@@ -1,12 +1,12 @@
 ﻿@model StrumentoMusicale
 
-<div class="container justify-content-center">
-    <div class="row">
-        <div class="col-12">
+<div class="container-fluid justify-content-center">
+    <div class="row justify-content-center">
+        <div class="col-xl-4 col-lg-12">
             <div class="d-flex align-items-center">
                 <h1 class="mt-3 mb-3">Dettagli Strumento</h1>
             </div>
-            <div class="post-single-image-container">
+            <div class="post-single-image-container mx-5">
                 <img src="@Model.Foto" height="500" width="600">
             </div>
             <h4>
@@ -35,6 +35,41 @@
                     <span>Nessuna Categoria Associata</span>
                 }
             </h4>
+        </div>
+        <div class="col-xl-4 col-lg-12">
+            <h2>Tabella Rifornimenti</h2>
+            <!--Se non ci sono richieste restituisce H2 altrimenti una table dei rifornimenti effettuati-->
+            @if(@Model.Rifornisci == null)
+            {
+                <h3 class="text-uppercase">Non ci sono rifornimenti</h3>
+            }
+            else
+            {
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                        <th scope="col">Nome Rifornitore</th>
+                        <th scope="col">Quantita</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Nome Strumento</th>
+                        <th scope="col">Prezzo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        
+                @foreach(Rifornisci rifornimento in Model.Rifornisci)
+                {
+                    <tr>
+                        <td class="align-middle">@rifornimento.Nome</td>
+                        <td class="align-middle">@rifornimento.Quantita</td>
+                        <td class="align-middle">@rifornimento.Data</td>
+                        <td class="align-middle">@rifornimento.strumentoMusicale.Nome</td>
+                        <td class="align-middle">@rifornimento.strumentoMusicale.Prezzo</td>
+                    </tr>
+                }
+                    </tbody>
+                </table>
+            }
         </div>
     </div>
 </div>

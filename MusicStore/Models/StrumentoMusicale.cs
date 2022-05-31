@@ -38,6 +38,7 @@ namespace MusicStore.Models
 
         [JsonIgnore]
         public List<Rifornisci>? Rifornisci { get; set; }
+
         public List<Acquista>? Acquista { get; set; }
 
         //---------------------------------------
