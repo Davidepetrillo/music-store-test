@@ -7,20 +7,21 @@ namespace MusicStore.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return View("Index");
         }
-
+        [HttpGet]
         public IActionResult Home()
         {
             return View();
         }
 
         [HttpGet]
-        public IActionResult Details()
+        public IActionResult Details(int id)
         {
-            return View();
+            return View("Details", id);
         }
 
         public IActionResult AboutUs()

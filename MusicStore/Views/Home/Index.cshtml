@@ -64,14 +64,12 @@ function loadStrument(parameter) {
             document.getElementById('wait_struments').classList.add('d-none');
             document.getElementById('struments_output').classList.remove('d-none');
 
-            result.data.forEach(strument => {
-                
-            var urlDetails = "/Home/Details/" + strument.id;
+            result.data.forEach(strument => {   
 
             document.getElementById('struments_output').innerHTML +=
             `
                 <div class="col-lg-4 col-md-6 col-xs-12 text-center">
-                    <a href="${urlDetails}">
+                    <a href="/Home/Details/${strument.id}">
                         <div class="card my-3 border-0">
                             <img src="${strument.foto}" class="img-fluid" alt="Image">
                             <div id="dettagliStrumento" class="card-body">
@@ -86,7 +84,7 @@ function loadStrument(parameter) {
                             <i class="fas fa-heart"></i>
                         </div>
                      </div>
-                </div>
+                </div> 
             `
             });
         }
@@ -94,7 +92,7 @@ function loadStrument(parameter) {
     console.log(error);
     });
 }
-
+/*
 var heartContainer = document.getElementsByClassName('icon-wrapper');
 
 Object.keys(heartContainer).forEach(singleElement => {
@@ -115,6 +113,6 @@ Object.keys(heartContainer).forEach(singleElement => {
         }
     });
 
-});
+});*/
 </script>
 }

@@ -47,27 +47,19 @@
         @section Scripts {
 
         <script type="text/javascript">
+
             var url = window.location.pathname;
             var id = url.substring(url.lastIndexOf('/') + 1);
 
-
             detailsInstruments(id);
 
-            
+            function detailsInstruments(parameterId){
+                axios.get('/api/Struments/Details/' + parameterId)
+                .then((result) => {
 
-            function detailsInstruments(id){
-
-            
-           
-
-                axios.get('/api/Struments/Get',{
-                    params : {
-                        id : id
-                    }
-                }).then((result) => {
-
-                        document.getElementById("details_instruments").innerHTML = 
-                        `
+                    if (result.data.id == parameterId) {
+                        document.getElementById("details_instruments").innerHTML =
+                            `
                         <div class="col-lg-4 col-md-6 col-xs-12 text-center">
                           
                                 <div class="card my-3">
@@ -80,7 +72,7 @@
                                 </div>
                         </div>
                         `
-                
+                    }
                     
                     }).catch((error) => {
                         console.log("C'è stato un errore: " + error);
@@ -93,6 +85,7 @@
 
                    var Quantita = document.getElementById('Quantita').value;
                    var Data = document.getElementById('Data').value;
+                   var idStrument = id;
 
                    var nuovoAcquisto = {
                        Data : Data,
@@ -100,14 +93,9 @@
                        StrumentoMusicaleId : id
                    }
 
-                   axios.post('api/Struments/Acquista', nuovoAcquisto
+                   axios.post('/api/Struments/AcquistaStrumento/' + id, nuovoAcquisto
                    ).then((result) => {
-                       var url = window.location.href;
-                        console.log(url)
-                        
-                        var home = url.substring(0, 22);
-                            console.log(home);
-
+                       alert("Messaggio inviato correttamente");
                         window.location.assign(url);
 
                    }).catch((error) => {
