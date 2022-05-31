@@ -37,7 +37,8 @@ namespace MusicStore.Models
         public int? CategoriaId { get; set; }
 
         [JsonIgnore]
-        public List<Rifornisci>? Rifornisci { get; set; }
+        public List<Rifornisci> Rifornisci { get; set; }
+
         public List<Acquista>? Acquista { get; set; }
 
         //---------------------------------------
