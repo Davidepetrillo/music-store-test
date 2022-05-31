@@ -7,11 +7,12 @@ namespace MusicStore.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return View("Index");
         }
-
+        [HttpGet]
         public IActionResult Home()
         {
             return View();
@@ -20,24 +21,7 @@ namespace MusicStore.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            using (MusicContext db = new MusicContext())
-            {
-                try
-                {
-                    StrumentoMusicale strumentoTrovato = db.StrumentoMusicale
-                        .Where(x => x.Id == id)
-                        .First();
-                    return View("Details", strumentoTrovato);
-                }
-                catch (InvalidOperationException ex)
-                {
-                    return NotFound("Lo strumento musicale non è stato trovato");
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
-            }
+            return View("Details", id);
         }
 
         public IActionResult AboutUs()

@@ -10,9 +10,9 @@ namespace MusicStore.Controllers.Api
     [ApiController]
     public class StrumentsController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet] 
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult Get(string? searchString, int? id)
+        public IActionResult Get(string? searchString)
         {
             List<StrumentoMusicale> struments = new List<StrumentoMusicale>();
 
@@ -27,19 +27,60 @@ namespace MusicStore.Controllers.Api
                     || strument.Categoria.nomeCategoria.Contains(searchString))
                     .ToList<StrumentoMusicale>();
                 }
-                else if (id != null)
-                {
-                        StrumentoMusicale dettaglioStrumento = context.StrumentoMusicale
-                        .Where(strumento => strumento.Id == id)
-                        .First();
-                        return Ok(dettaglioStrumento);
-                } else
+                else
                 {
                     struments = context.StrumentoMusicale.ToList<StrumentoMusicale>();
                 }
                 
 
                 return Ok(struments);
+            }
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(StrumentoMusicale), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult Details(int id)
+        {
+            //Troviamo l'id corrispondente al pacchetto con lo stesso id
+            //Ritorniamo quel pacchetto oppure NOTFOUND
+            using (MusicContext context = new MusicContext())
+            {
+                StrumentoMusicale? strumentToFound = context.StrumentoMusicale
+                    .Where(strument => strument.Id == id)
+                    .Include(strument => strument.Categoria)
+                    .FirstOrDefault();
+
+                if (strumentToFound == null)
+                    return NotFound();
+                else
+                    return Ok(strumentToFound);
+            }
+        }
+
+
+        [HttpPost("{id}")]
+        [ProducesResponseType(typeof(Acquista), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        public IActionResult AcquistaStrumento([FromBody] Acquista model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return UnprocessableEntity(ModelState);
+            }
+
+            using (MusicContext db = new MusicContext())
+            {
+                Acquista acquista = new Acquista();
+
+                
+                acquista.StrumentoMusicaleId = model.StrumentoMusicaleId;
+                acquista.Quantita -= model.Quantita;
+                acquista.Data = model.Data;
+
+                db.Add(acquista);
+                db.SaveChanges();
+                return Ok();
             }
         }
 
