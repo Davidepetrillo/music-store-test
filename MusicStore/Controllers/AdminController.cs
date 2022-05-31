@@ -83,6 +83,7 @@ namespace MusicStore.Controllers
                 SmFound = db.StrumentoMusicale
                     .Where(strumento => strumento.Id == id)
                     .Include(strumento => strumento.Categoria)
+                    .Include(strumento => strumento.Rifornisci)
                     .FirstOrDefault();
             }
 
