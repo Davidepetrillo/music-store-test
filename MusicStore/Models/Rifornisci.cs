@@ -10,10 +10,10 @@ namespace MusicStore.Models
         public int Id { get; set; }
 
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+       [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Data { get; set; }
-
-        [Required(ErrorMessage = "Campo obbligatorio")]
+      
+       [Required(ErrorMessage = "Campo obbligatorio")]
         [StringLength(50, ErrorMessage = "Nome rifornitore maggiore di 50 parole")]
         public string Nome { get; set; }
 
@@ -23,7 +23,7 @@ namespace MusicStore.Models
 
         //----------
         
-        public StrumentoMusicale strumentoMusicale { get; set; } 
+        public StrumentoMusicale? strumentoMusicale { get; set; } 
         
         public int? StrumentoMusicaleId { get; set; }
 
