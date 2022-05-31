@@ -243,7 +243,8 @@ namespace MusicStore.Controllers
                 {
                     Rifornisci rifornisci = new Rifornisci();
                     SmFound.QuantitaStrumento += Model.Quantita;
-                    rifornisci.Quantita = Model.Quantita;   
+                    rifornisci.Quantita = Model.Quantita;
+                    rifornisci.Data = DateTime.Now;
                     rifornisci.StrumentoMusicaleId = SmFound.Id;
                     
                     rifornisci.Nome = Model.Nome;
