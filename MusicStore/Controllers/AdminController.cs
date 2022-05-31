@@ -192,5 +192,81 @@ namespace MusicStore.Controllers
                 }
             }
         }
+
+
+
+        [HttpGet]
+        public IActionResult RifornisciArticolo(int id)
+        {
+            StrumentoMusicale? SmFound = null;
+            using (MusicContext db = new MusicContext())
+            {
+                SmFound = db.StrumentoMusicale
+                    .Where(strumento => strumento.Id == id)
+                    
+                    .FirstOrDefault();
+            }
+
+            if (SmFound != null)
+            {
+
+                return View("RifornisciArticolo");
+            }
+            else
+            {
+                return NotFound("Lo Strumento Musicale  con id " + id + " non è stato trovato");
+            }
+        }
+
+
+
+        [HttpPost]
+        public IActionResult RifornisciArticolo(int id,Rifornisci Model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View("RifornisciArticolo", Model);
+            }
+
+            
+            
+            using (MusicContext db = new MusicContext())
+            {
+                StrumentoMusicale SmFound = db.StrumentoMusicale
+                    .Where(strumento => strumento.Id == id)
+                    .FirstOrDefault();
+
+
+                if (SmFound != null)
+                {
+                    Rifornisci rifornisci = new Rifornisci();
+                    SmFound.QuantitaStrumento += Model.Quantita;
+                    rifornisci.Quantita = Model.Quantita;   
+                    rifornisci.StrumentoMusicaleId = SmFound.Id;
+                    
+                    rifornisci.Nome = Model.Nome;
+                    
+
+                    db.Rifornisci.Add(rifornisci);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+            }
+            
+        }
+
+        
+
     }
 }
+
+
+
+

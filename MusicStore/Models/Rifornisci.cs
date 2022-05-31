@@ -31,12 +31,16 @@ namespace MusicStore.Models
         {
 
         }
-        public Rifornisci(int quantita, string nome)
+
+        /*public Rifornisci(int quantita, string nome, DateTime data, int? strumentoMusicaleId)
         {
             Quantita = quantita;
-            Data=DateTime.Now;
+            Data=data;
             Nome = nome;
+            StrumentoMusicaleId = strumentoMusicaleId;    
+
 
         }
+        */
     }
 }
