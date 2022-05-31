@@ -68,6 +68,7 @@ function loadStrument(parameter) {
             document.getElementById('struments_output').innerHTML +=
             `
                 <div class="col-lg-4 col-md-6 col-xs-12 text-center">
+                     <button type="button" class="btn btn-outline-danger fas fa-heart icon-wrapper btLike onclick="likeHeart()">&#10084;</button>
                     <a href="/Home/Details/${strument.id}">
                         <div class="card my-3 border-0">
                             <img src="${strument.foto}" class="img-fluid" alt="Image">
@@ -77,12 +78,7 @@ function loadStrument(parameter) {
                                 <span class="btn btn-light text-dark border border-dark">Acquista</span>
                             </div>
                         </div>
-                    </a>
-                    <div class="wrapper">
-                        <div class="icon-wrapper">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                     </div>
+                    </a>                 
                 </div> 
             `
             });
@@ -91,7 +87,10 @@ function loadStrument(parameter) {
     console.log(error);
     });
 }
-/*
+
+function likeHeart(){
+
+
 var heartContainer = document.getElementsByClassName('icon-wrapper');
 
 Object.keys(heartContainer).forEach(singleElement => {
@@ -112,6 +111,7 @@ Object.keys(heartContainer).forEach(singleElement => {
         }
     });
 
-});*/
+});
+}
 </script>
 }
