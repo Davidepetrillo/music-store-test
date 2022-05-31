@@ -13,7 +13,9 @@ a {
     color: black;
 }
 
-
+.instrument_card {
+    margin-bottom: 100px;
+}
 
 
 /*-----------------------------------------------------*/
@@ -79,18 +81,18 @@ header {
 /*--------------------------------------------------------*/
 
 .wrapper {
-    height: 10vh;
-    display: flex;
     align-items: center;
     justify-content: center;
-    background: #333;
+    margin-left: 40%;
+    line-height: 10px;
 }
+
 .icon-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 55px;
-    width: 55px;
+    height: 30px;
+    width: 30px;
     margin: 0 20px;
     color: #333;
     background: #fff;
@@ -171,4 +173,9 @@ header {
         -o-transform: scale(1);
         transform: scale(1);
     }
+}
+
+
+.btLike{
+    border-radius: 50%;
 }
