@@ -28,14 +28,15 @@
 <!--Sezione cassifica-->
 <section>
     <div class="container-fluid">
-        <div class="row">
+        <div class="row text-center">
             <div class="col-12">
                 <h3>Strumenti piu' venduti nell'ultimo mese</h3>
             </div>
-            <div id="classifica" class="col-12">
-
-            </div>
         </div>
+        <div id="classifica" class="row">
+
+        </div>
+        
     </div>
 </section>
 
@@ -83,11 +84,12 @@ function loadStrument(parameter) {
                 <div class="col-lg-4 col-md-6 col-xs-12 text-center">
                      <button type="button" class="btn btn-outline-danger fas fa-heart icon-wrapper btLike onclick="likeHeart()">&#10084;</button>
                     <a href="/Home/Details/${strument.id}">
-                        <div class="card my-3 border-0">
-                            <img src="${strument.foto}" class="img-fluid" alt="Image">
+                        <div class="card my-3 border-0" style="width:18rem;">
+                            <img src="${strument.foto}" class=" card-img-top" alt="Image" width=250 height="200">
                             <div id="dettagliStrumento" class="card-body">
                                 <h5 class="card-title">${strument.nome}</h5>
-                                <p class="card-text">${strument.descrizione}</p>                               
+                                <p class="card-text">${strument.descrizione}</p> 
+                                <h5>${strument.prezzo}&euro;</h5>
                                 <span class="btn btn-light text-dark border border-dark">Acquista</span>
                             </div>
                         </div>
@@ -101,15 +103,33 @@ function loadStrument(parameter) {
     });
 }
 function loadClassifica() {
+
+    document.getElementById('classifica').innerHTML = '';
+
     axios.get('/api/Struments/GetClassifica')
         .then((result) => {
             console.log(result);
             console.log(result.data);
 
-            document.getElementById('calssifica').innerHTML +=
+
+            result.data.forEach(strument => {
+                document.getElementById('classifica').innerHTML +=
             `
+                <div class="col-lg-4 col-md-6 col-xs-12 text-center card">
+                    <div class="card-body">
+                        <h5 class="card-title">${strument.nomeStrumento}</h5>
+                        <p class="card-text">${strument.quantitaAcquistata}</p>
+                        <a href="#" class="btn btn-light text-dark border border-dark stretched-link">acquista</a>
+
+                    </div>
+                    
+                    
+                </div>
                 
             `
+
+            });
+            
         }).catch ((Error) => {
             console.log(Error);
         });
