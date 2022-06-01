@@ -14,6 +14,7 @@ namespace MusicStore.Models
         public DateTime Data { get; set; }
 
         [Required(ErrorMessage = "Campo obbligatorio")]
+        [Range(1, 50, ErrorMessage = "Il massimo numero di strumenti che è possibile acquistare e' 50")]
         public int Quantita { get; set; }
 
         //----------
@@ -24,13 +25,16 @@ namespace MusicStore.Models
 
         public Acquista()
         {
+
         }
-        
+
+        /*
         public Acquista(int quantita)
         {
             Quantita = quantita;
             Data = DateTime.Now;
 
         }
+        */
     }
 }

@@ -17,7 +17,7 @@ namespace MusicStore.Models
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "Campo obbligatorio")]
-        [Range(1, 50, ErrorMessage = "Il massimo numero di strumenti e' 50")]
+        [Range(1, 100, ErrorMessage = "Il massimo numero di strumenti e' 50")]
         public int Quantita { get; set; }
 
         //----------
