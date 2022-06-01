@@ -40,18 +40,12 @@ namespace MusicStore.Controllers.Api
         [HttpGet]
         public IActionResult GetClassifica()
         {
-            List<Acquista> acquistos = new List<Acquista>();
 
             using(MusicContext context = new MusicContext())
             {
-                acquistos = context.Acquista
-                    .Include(buy => buy.strumentoMusicale)
-                    .Where(buy => buy.Data >= buy.Data.AddMonths(-1))
-                    .GroupBy(buy => buy.strumentoMusicale.Nome)
-                    .OrderBy(buy => buy.Sum(s => s.Quantita))
-                    .SelectMany(g => g.Take(5)).ToList();
+                var acquistoStrumento = context.acquistaStrumento.FromSqlRaw("SELECT StrumentoMusicale.Nome AS nomeStrumento, SUM(quantita) AS quantitaAcquistata FROM StrumentoMusicale INNER JOIN Acquista ON StrumentoMusicale.Id = Acquista.StrumentoMusicaleId WHERE MONTH(Acquista.Data) = MONTH(DATEADD(month, -1, GETDATE())) GROUP BY StrumentoMusicale.Id, StrumentoMusicale.Nome ORDER BY quantitaAcquistata DESC").ToList();
 
-                return Ok(acquistos);
+                return Ok(acquistoStrumento);
             }
         }
 
