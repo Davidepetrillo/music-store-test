@@ -9,6 +9,8 @@ namespace MusicStore.Models
 
         public int quantitaAcquistata { get; set; }
 
+        public string fotoStrumento { get; set; }
+
         public AcquistoStrumento()
         {
 
