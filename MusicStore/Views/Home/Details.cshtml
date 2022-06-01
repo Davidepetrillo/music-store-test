@@ -1,6 +1,4 @@
-﻿
-
-    <div class="container">
+﻿   <div class="container">
         <div class="row">
             <div class="col">
             <h1 class="col text-center mt-5 fw-bold">Music Store</h1>
@@ -17,8 +15,10 @@
 
       </div>
 
+      <!--<button type="button" class="btn btn-outline-danger fas fa-heart icon-wrapper btLike" onclick="likeHeart()">&#10084;</button>-->
+      
 
-      <form onsubmit="AcquistaStrumento(event)"  method="post">
+      <form onsubmit="AcquistaStrumento(event)" method="post">
       <!-- data input -->
         <div class="row p-2">
 
@@ -36,14 +36,13 @@
                 <input type="number" class="form-control" id="Quantita" placeholder="Quantita">
             </div>
         </div>
-
-      
-      
-
       <!-- Submit button -->
       <button type="submit" class="btn btn-primary btn-block mb-4">Acquista</button>
     </form>
-
+    
+    <form onsubmit="AddLike(event)" method="post">
+        <button type="submit" class="btn btn-primary btn-block mb-4">Like</button>
+    </form>
         @section Scripts {
 
         <script type="text/javascript">
@@ -59,21 +58,23 @@
 
                     if (result.data.id == parameterId) {
                         document.getElementById("details_instruments").innerHTML =
-                            `
+                        `
                         <div class="col-lg-4 col-md-6 col-xs-12 text-center">
-                          
                                 <div class="card my-3">
                                     <img src="${result.data.foto}" class="img-fluid" alt="Image">
                                     <div id="dettagliStrumento" class="card-body">
                                         <h5 class="card-title">${result.data.nome}</h5>
                                         <p class="card-text">${result.data.descrizione}</p>
                                         <span class="btn btn-light text-dark border border-dark">Acquista</span>
+                                        <div>
+                                            <button id="button_like" type="button" class="btn btn-primary btn-block mb-4" onclick="AddLike()">Like</button>
+                                            <span id="span_to_remove" class="d-none">${result.data.numeroLike} mi piace</span>
+                                        </div>
                                     </div>
                                 </div>
                         </div>
                         `
-                    }
-                    
+                    } 
                     }).catch((error) => {
                         console.log("C'è stato un errore: " + error);
 
@@ -104,7 +105,64 @@
 
                }
 
+               //document.getElementById('button_like').addEventListener('click', AddLike());
 
-        </script>
+function AddLike(event) 
+{
+    event.preventDefault();
 
+        axios.post('api/Like/AddLikeToInstruments/' + id)
+        .then((result) => {
+            console.log("Sta inviando i dati");
+        }).catch((error) => {
+            console.log("Errore" + error);
+        });
+}
+
+/*function likeHeart(){
+
+var heartContainer = document.getElementsByClassName('btLike');
+
+Object.keys(heartContainer).forEach(singleElement => {
+    
+    
+    heartContainer[singleElement].addEventListener('click', function() {
+        
+        var contatore = 0;
+    
+        if (heartContainer[singleElement].classList.contains('liked'))
+        {
+            heartContainer[singleElement].classList.add('unliked');
+            heartContainer[singleElement].classList.remove('liked');
+            setTimeout(unlikeRemover, 250);
+            contatore = -1;
         }
+        else 
+        {
+            heartContainer[singleElement].classList.add('liked');
+            heartContainer[singleElement].classList.remove('unliked');
+            contatore = 1;
+        }
+
+        var idPerLike = id;
+
+        axios.post('api/Like/AddLikeToInstruments', {
+            params: {
+                id : idPerLike,
+                numeroLike : contatore
+            }
+        })
+        .then((result) => {
+            console.log("Sta inviando i dati");
+        }).catch((error) => {
+            console.log("Errore" + error);
+        });
+
+            function unlikeRemover() {
+                heartContainer[singleElement].classList.remove('unliked');
+            }
+        });
+    });
+}*/
+</script>
+}
