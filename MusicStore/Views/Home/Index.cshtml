@@ -25,6 +25,19 @@
     </div>
 </section>
 
+<!--Sezione cassifica-->
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h3>Strumenti piu' venduti nell'ultimo mese</h3>
+            </div>
+            <div id="classifica" class="col-12">
+
+            </div>
+        </div>
+    </div>
+</section>
 
 <!--Sezione degli Scripts-->
 @section Scripts  {
@@ -34,7 +47,7 @@
 document.getElementById('search_struments').addEventListener('keyup', searchParameter);
 
 searchParameter();
-    
+loadClassifica();
 //Funzione che cerca la stringa in base al valore associato nella barra di ricerca
 //richiamando la funzione che carica le card degli strumenti
 function searchParameter() {
@@ -87,7 +100,20 @@ function loadStrument(parameter) {
     console.log(error);
     });
 }
+function loadClassifica() {
+    axios.get('/api/Struments/GetClassifica')
+        .then((result) => {
+            console.log(result);
+            console.log(result.data);
 
+            document.getElementById('calssifica').innerHTML +=
+            `
+                
+            `
+        }).catch ((Error) => {
+            console.log(Error);
+        });
+}
 function likeHeart(){
 
 

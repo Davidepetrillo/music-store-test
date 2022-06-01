@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MusicStore.Data;
 using MusicStore.Models;
+using System.Linq;
 
 namespace MusicStore.Controllers.Api
 {
@@ -32,8 +33,25 @@ namespace MusicStore.Controllers.Api
                     struments = context.StrumentoMusicale.ToList<StrumentoMusicale>();
                 }
 
-
                 return Ok(struments);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult GetClassifica()
+        {
+            List<Acquista> acquistos = new List<Acquista>();
+
+            using(MusicContext context = new MusicContext())
+            {
+                acquistos = context.Acquista
+                    .Include(buy => buy.strumentoMusicale)
+                    .Where(buy => buy.Data >= buy.Data.AddMonths(-1))
+                    .GroupBy(buy => buy.strumentoMusicale.Nome)
+                    .OrderBy(buy => buy.Sum(s => s.Quantita))
+                    .SelectMany(g => g.Take(5)).ToList();
+
+                return Ok(acquistos);
             }
         }
 
@@ -87,8 +105,6 @@ namespace MusicStore.Controllers.Api
                 return Ok();
             }
         }
-
-
 
     }
 }
