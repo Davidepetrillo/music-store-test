@@ -110,8 +110,13 @@
 function AddLike(event) 
 {
     event.preventDefault();
+        var idPerLike = id;
 
-        axios.post('api/Like/AddLikeToInstruments/' + id)
+        axios.post('api/Like/AddLikeToInstruments', {
+            params: {
+                id : idPerLike,
+            }
+        })
         .then((result) => {
             console.log("Sta inviando i dati");
         }).catch((error) => {
