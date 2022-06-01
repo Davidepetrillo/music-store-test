@@ -23,7 +23,7 @@ namespace MusicStore.Data
            
         modelBuilder.Entity<AcquistoStrumento>(e =>
            {
-          e.HasNoKey();
+            e.HasNoKey();
            });
         }
 
