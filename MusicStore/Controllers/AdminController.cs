@@ -177,6 +177,8 @@ namespace MusicStore.Controllers
             using (MusicContext context = new MusicContext())
             {
                 StrumentoMusicale? strumentoDaEliminare = context.StrumentoMusicale
+                    .Include(strumento => strumento.Rifornisci)
+                    .Include(strumento => strumento.Categoria)
                     .Where(strumento => strumento.Id == id)
                     .FirstOrDefault();
 
