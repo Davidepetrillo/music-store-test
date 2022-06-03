@@ -13,34 +13,46 @@
             </div>
         </div>
     </div>
-    <div id="details_instruments">
+<div class="container">
+    <div class="row">
 
+        <div class="col-lg-8 col-md-8 col-sm-12 text-center" id="details_instruments">
+
+        </div>
+        
+        
+
+        <div class="col-4">
+        <form onsubmit="AcquistaStrumento(event)" method="post">
+        <!-- data input -->
+        
+
+                <div class="col-12">
+                    <label for="Data">Data</label>
+                    <input type="datetime-local" class="form-control" id="Data" placeholder="data">
+                </div>
+        
+
+        <!-- Quantita input -->
+        
+
+                <div class="col-12">
+                    <label for="Quantita">Quantita</label>
+                    <input type="number" class="form-control" id="Quantita" placeholder="Quantita">
+                </div>
+       
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-4">Acquista</button>
+        </form>
+        </div>
     </div>
+
+</div>
 
       <!--<button type="button" class="btn btn-outline-danger fas fa-heart icon-wrapper btLike" onclick="likeHeart()">&#10084;</button>-->
       
 
-<form onsubmit="AcquistaStrumento(event)" method="post">
-    <!-- data input -->
-    <div class="row p-2">
 
-        <div class="col-12">
-            <label for="Data">Data</label>
-            <input type="datetime-local" class="form-control" id="Data" placeholder="data">
-        </div>
-    </div>
-
-    <!-- Quantita input -->
-    <div class="row p-2">
-
-        <div class="col-12">
-            <label for="Quantita">Quantita</label>
-            <input type="number" class="form-control" id="Quantita" placeholder="Quantita">
-        </div>
-    </div>
-    <!-- Submit button -->
-    <button type="submit" class="btn btn-primary btn-block mb-4">Acquista</button>
-</form>
     
 @section Scripts {
 
@@ -58,13 +70,13 @@ function detailsInstruments(parameterId){
     if (result.data.id == parameterId) {
         document.getElementById("details_instruments").innerHTML =
         `
-        <div class="col-lg-4 col-md-6 col-xs-12 text-center">
+        
                 <div class="card my-3">
                     <img src="${result.data.foto}" class="img-fluid" alt="Image">
                     <div id="dettagliStrumento" class="card-body">
                         <h5 class="card-title">${result.data.nome}</h5>
                         <p class="card-text">${result.data.descrizione}</p>
-                        <span class="btn btn-light text-dark border border-dark">Acquista</span>
+                        
                         <div>
                             <button type="button" class="btn btn-primary btn-block mb-4" onclick="AddLike(${result.data.id})">Like</button>
                             <span id="span_to_remove">${result.data.numeroLike} mi piace</span>
