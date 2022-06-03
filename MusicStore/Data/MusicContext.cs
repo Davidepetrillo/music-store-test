@@ -10,6 +10,7 @@ namespace MusicStore.Data
         public DbSet<Categoria> Categoria { get; set; }
         public DbSet<Acquista> Acquista { get; set; }
         public DbSet<Rifornisci> Rifornisci { get; set; }
+        public DbSet<LoginAdmin> LoginAdmin { get; set; }
 
         public virtual DbSet<AcquistoStrumento> acquistaStrumento { get; set; }
 
