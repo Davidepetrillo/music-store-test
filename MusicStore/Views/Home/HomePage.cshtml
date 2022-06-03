@@ -16,24 +16,26 @@
         <div class="nav-area">
             <ul>
                 <li>
-                    <a href="#" oumouseenter="changeImg('img/pexels-andrea-piacquadio-3771097.jpg')">User</a>
+                    <a href="#" onmouseenter="changeImg('https\://picsum.photos/id/237/200/300')">User</a>
                 </li>
                 <li>
-                    <a href="#" oumouseenter="changeImg('img/pexels-wendy-wei-1943411.jpg')">Admin</a>
+                     <a href="#" onmouseenter="changeImg('https\://picsum.photos/seed/picsum/200/300')">Admin</a>
                 </li>
                 <li>
-                  <a href="#" oumouseenter="changeImg('img/pexels-andrea-piacquadio-3771097.jpg')">About us</a>
+                  <a href="#" onmouseenter="changeImg()">Admin</a>
               </li>
             </ul>
         </div>
-        <div class="image-area">
-            <img src="img/pexels-wendy-wei-1943411.jpg" alt="" id="slider">
+        <div class="image-area" name="slider" id="slider">
+
+            
         </div>
 </div>
     <script>
-      function changeImg(imgchanger){
-        document.getElementById('slider').src=imgchanger;
-      }
-    </script>
+          function changeImg(imgchanger){
+              var div = document.getElementById('slider')
+              div.innerHTML = '<img src="'+imgchanger+'" />';
+          }
+      </script>
   </body>
 </html>
