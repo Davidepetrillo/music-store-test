@@ -93,8 +93,8 @@ function detailsInstruments(parameterId){
                 <h5>${result.data.prezzo}&euro;</h5>
                         
                 <div>
-                    <button id="like" type="button" class="icon-wrapper btLike" onclick="twoFunctionTogheter(${result.data.id}); likeHeart()">
-                    &#10084;<p class="fas fa-heart"></p>
+                    <button id="like" class="icon-wrapper" onclick="AddLike(${result.data.id})">
+                      &#10084;<p class="fas fa-heart"></p>
                     </button>
                     <span id="span_to_remove">${result.data.numeroLike} mi piace</span>
                 </div>
@@ -134,26 +134,10 @@ function AcquistaStrumento(event){
 
 }              
 
-function twoFunctionTogheter(){
-    likeHeart();
-    AddLike(id);
-}
 
 function AddLike(id) 
 {
-        axios.post('/api/Like/AddLikeToInstruments', {
-                StrumentoMusicaleId : id,
-        })
-        .then((result) => {
-            console.log("Sta inviando i dati");
-        }).catch((error) => {
-            console.log("Errore" + error);
-        });
-}
-
-function likeHeart(){
-
-var heartContainer = document.getElementsByClassName('btLike');
+    var heartContainer = document.getElementsByClassName('icon-wrapper');
 
 Object.keys(heartContainer).forEach(singleElement => {
     
@@ -178,6 +162,16 @@ Object.keys(heartContainer).forEach(singleElement => {
             }
         });
     });
+
+        axios.post('/api/Like/AddLikeToInstruments', {
+                StrumentoMusicaleId : id,
+        })
+        .then((result) => {
+            console.log("Sta inviando i dati");
+        }).catch((error) => {
+            console.log("Errore" + error);
+        });
 }
+
 </script>
 }
