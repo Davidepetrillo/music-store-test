@@ -23,27 +23,37 @@
         
 
         <div class="col-4">
-        <form onsubmit="AcquistaStrumento(event)" method="post">
-        <!-- data input -->
+
+            <div id="descrizione_strumento">
+
+            </div>
+
+        
+                <form onsubmit="AcquistaStrumento(event)" method="post">
+            <!-- data input -->
         
 
-                <div class="col-12">
-                    <label for="Data">Data</label>
-                    <input type="datetime-local" class="form-control" id="Data" placeholder="data">
-                </div>
+                    <div class="col-12">
+                        <label for="Data">Data</label>
+                        <input type="datetime-local" class="form-control" id="Data" placeholder="data">
+                    </div>
         
 
-        <!-- Quantita input -->
+            <!-- Quantita input -->
         
 
+                    <div class="col-12">
+                        <label for="Quantita">Quantita</label>
+                        <input type="number" class="form-control" id="Quantita" placeholder="Quantita">
+                    </div>
                 <div class="col-12">
                     <label for="Quantita">Quantita</label>
                     <input type="number" min="1" max="50" class="form-control" id="Quantita" placeholder="Quantita">
                 </div>
        
-            <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-block mb-4">Acquista</button>
-        </form>
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">Acquista</button>
+            </form>
         </div>
     </div>
 
@@ -68,23 +78,30 @@ function detailsInstruments(parameterId){
     .then((result) => {
 
     if (result.data.id == parameterId) {
+
         document.getElementById("details_instruments").innerHTML =
         `
         
-                <div class="card my-3">
-                    <img src="${result.data.foto}" class="img-fluid" alt="Image">
-                    <div id="dettagliStrumento" class="card-body">
-                        <h5 class="card-title">${result.data.nome}</h5>
-                        <p class="card-text">${result.data.descrizione}</p>
-                        
-                        <div>
-                            <button type="button" class="btn btn-primary btn-block mb-4" onclick="AddLike(${result.data.id})">Like</button>
-                            <span id="span_to_remove">${result.data.numeroLike} mi piace</span>
-                        </div>
-                    </div>
-                </div>
-        </div>
+                
+                    <img src="${result.data.foto}" class="" alt="Image" width="550" height 400>
+        `          
+        document.getElementById("descrizione_strumento").innerHTML =
+
         `
+                
+                <h5 class="card-title">${result.data.nome}</h5>
+                <p class="card-text">${result.data.descrizione}</p>
+                <h5>${result.data.prezzo}&euro;</h5>
+                        
+                <div>
+                    <button type="button" class="btn btn-primary btn-block mb-4" onclick="AddLike(${result.data.id})">Like</button>
+                    <span id="span_to_remove">${result.data.numeroLike} mi piace</span>
+                </div>
+        `
+                    
+               
+        
+        
     } 
     }).catch((error) => {
         console.log("C'è stato un errore: " + error);
