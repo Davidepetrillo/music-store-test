@@ -25,7 +25,15 @@ namespace MusicStore.Controllers.Api
 
                     if (smFound != null)
                     {
-                        smFound.NumeroLike++;
+                        if(data.Status == false)
+                        {
+                            smFound.NumeroLike++;
+                        }
+                        else
+                        {
+                            smFound.NumeroLike--;
+                        }
+                        
                     }
                             
                     database.SaveChanges(); 

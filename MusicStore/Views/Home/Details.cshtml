@@ -136,19 +136,23 @@ function AcquistaStrumento(event){
 function AddLike(id) 
 {
     var heartContainer = document.getElementsByClassName('icon-wrapper');
-
+    var state;
 Object.keys(heartContainer).forEach(singleElement => {          
-    
+        
+        
+
         if (heartContainer[singleElement].classList.contains('liked'))
         {
             heartContainer[singleElement].classList.add('unliked');
             heartContainer[singleElement].classList.remove('liked');
             setTimeout(unlikeRemover, 250);
+            state = true;
         }
         else 
         {
             heartContainer[singleElement].classList.add('liked');
             heartContainer[singleElement].classList.remove('unliked');
+            state = false;
         }
 
             function unlikeRemover() {
@@ -156,11 +160,15 @@ Object.keys(heartContainer).forEach(singleElement => {
             }
     });
 
+        
+
         axios.post('/api/Like/AddLikeToInstruments', {
                 StrumentoMusicaleId : id,
+                Status : state
         })
         .then((result) => {
             console.log("Sta inviando i dati");
+            console.log(result.data);
 
         }).catch((error) => {
             console.log("Errore" + error);
