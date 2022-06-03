@@ -10,7 +10,6 @@ namespace MusicStore.Models
         public int Id { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-
         public DateTime Data { get; set; }
 
         [Required(ErrorMessage = "Campo obbligatorio")]
