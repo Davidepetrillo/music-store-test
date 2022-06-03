@@ -137,11 +137,7 @@ function AddLike(id)
 {
     var heartContainer = document.getElementsByClassName('icon-wrapper');
 
-Object.keys(heartContainer).forEach(singleElement => {
-    
-    
-    heartContainer[singleElement].addEventListener('click', function() {
-        
+Object.keys(heartContainer).forEach(singleElement => {          
     
         if (heartContainer[singleElement].classList.contains('liked'))
         {
@@ -158,7 +154,6 @@ Object.keys(heartContainer).forEach(singleElement => {
             function unlikeRemover() {
                 heartContainer[singleElement].classList.remove('unliked');
             }
-        });
     });
 
         axios.post('/api/Like/AddLikeToInstruments', {
