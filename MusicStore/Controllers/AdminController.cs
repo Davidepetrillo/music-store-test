@@ -7,6 +7,44 @@ namespace MusicStore.Controllers
 {
     public class AdminController : Controller
     {
+        //------------------LOGIN---------------
+        [HttpGet]
+        public IActionResult Login()
+        {
+            LoginAdmin loginModel = new LoginAdmin();
+
+            return View("Login", loginModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Login(LoginAdmin loginModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Login");
+            }
+
+            using (MusicContext context = new MusicContext())
+            {
+                var status = context.LoginAdmin
+                    .Where(data => data.UserName == loginModel.UserName && data.Password == loginModel.Password)
+                    .FirstOrDefault();
+
+                if (status != null)
+                {
+                    ViewBag.Message = "Successfull login";
+                }
+                else
+                {
+                    ViewBag.Message = "Invalid login detail.";
+                }
+
+                return RedirectToAction("Index");
+            }
+        }
+        //-----------------------------------------------------
+
         [HttpGet]
         public IActionResult Index()
         {
