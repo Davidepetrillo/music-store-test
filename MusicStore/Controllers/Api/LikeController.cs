@@ -9,7 +9,7 @@ namespace MusicStore.Controllers.Api
     [ApiController]
     public class LikeController : ControllerBase
     {
-        [HttpPost("{id}")]
+        [HttpPost]
         public IActionResult AddLikeToInstruments(Liked data)
         {
             if (!ModelState.IsValid)
