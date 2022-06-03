@@ -91,7 +91,9 @@ function detailsInstruments(parameterId){
                 <h5>${result.data.prezzo}&euro;</h5>
                         
                 <div>
-                    <button type="button" class="btn btn-primary btn-block mb-4" onclick="AddLike(${result.data.id})">Like</button>
+                    <button id="like" type="button" class="icon-wrapper" onclick="AddLike(${result.data.id})">
+                    &#10084;<p class="fas fa-heart"></p>
+                    </button>
                     <span id="span_to_remove">${result.data.numeroLike} mi piace</span>
                 </div>
         `
