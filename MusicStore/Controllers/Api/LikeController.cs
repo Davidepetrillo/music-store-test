@@ -9,8 +9,8 @@ namespace MusicStore.Controllers.Api
     [ApiController]
     public class LikeController : ControllerBase
     {
-        [HttpPost]
-        public IActionResult AddLikeToInstruments([FromBody] StrumentoMusicale data)
+        [HttpPost("{id}")]
+        public IActionResult AddLikeToInstruments(Liked data)
         {
             if (!ModelState.IsValid)
             {
@@ -18,30 +18,19 @@ namespace MusicStore.Controllers.Api
             } 
             else
             {
-                StrumentoMusicale? smFound = new StrumentoMusicale();
-
                 using(MusicContext database = new MusicContext())
                 {
-                     smFound = database.StrumentoMusicale
-                    .Where(strumento => strumento.Id == data.Id)
-                    .FirstOrDefault();
+                    StrumentoMusicale? smFound = new StrumentoMusicale();
+                    smFound = database.StrumentoMusicale.Find(data.StrumentoMusicaleId);
 
                     if (smFound != null)
                     {
                         smFound.NumeroLike++;
-                        database.SaveChanges();
-
-                        return Ok();
-
-                    } 
-                    else
-                    {
-                        return BadRequest("Lo strumento inviato non è corretto");
                     }
-
+                            
+                    database.SaveChanges(); 
                 }
-
-                
+                return Ok();
             }
         }
     }

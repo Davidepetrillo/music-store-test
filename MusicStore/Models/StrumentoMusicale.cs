@@ -47,14 +47,14 @@ namespace MusicStore.Models
             
         }
 
-        public StrumentoMusicale(string nome, string descrizione, string foto, double prezzo, int quantitaStrumento)
+        public StrumentoMusicale(string nome, string descrizione, string foto, double prezzo, int quantitaStrumento, int numeroLike)
         {
             this.Nome = nome;
             this.Descrizione = descrizione;
             this.Foto = foto;
             this.Prezzo = prezzo;
             this.QuantitaStrumento = quantitaStrumento;
-           
+            this.NumeroLike = 0;
         }
     }
 }

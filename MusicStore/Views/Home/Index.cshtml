@@ -49,6 +49,7 @@ document.getElementById('search_struments').addEventListener('keyup', searchPara
 
 searchParameter();
 loadClassifica();
+
 //Funzione che cerca la stringa in base al valore associato nella barra di ricerca
 //richiamando la funzione che carica le card degli strumenti
 function searchParameter() {
@@ -82,7 +83,6 @@ function loadStrument(parameter) {
             document.getElementById('struments_output').innerHTML +=
             `
                 <div class="col-lg-4 col-md-6 col-xs-12 text-center">
-                     <button type="button" class="btn btn-outline-danger fas fa-heart icon-wrapper btLike onclick="likeHeart()">&#10084;</button>
                     <a href="/Home/Details/${strument.id}">
                         <div class="card my-3 border-0" style="width:18rem;">
                             <img src="${strument.foto}" class=" card-img-top" alt="Image" width=250 height="200">
@@ -96,12 +96,13 @@ function loadStrument(parameter) {
                     </a>                 
                 </div> 
             `
-            });
+        });
         }
-    }).catch((error) => {
+        }).catch((error) => {
     console.log(error);
     });
 }
+
 function loadClassifica() {
 
     document.getElementById('classifica').innerHTML = '';
@@ -120,44 +121,15 @@ function loadClassifica() {
                         <h5 class="card-title">${strument.nomeStrumento}</h5>
                         <p class="card-text">${strument.quantitaAcquistata}</p>
                         <a href="#" class="btn btn-light text-dark border border-dark stretched-link">acquista</a>
-
-                    </div>
-                    
-                    
-                </div>
-                
+                    </div>       
+                </div>                
             `
-
             });
             
         }).catch ((Error) => {
             console.log(Error);
         });
 }
-function likeHeart(){
 
-
-var heartContainer = document.getElementsByClassName('icon-wrapper');
-
-Object.keys(heartContainer).forEach(singleElement => {
-
-    heartContainer[singleElement].addEventListener('click', function () {
-        if (heartContainer[singleElement].classList.contains('liked')) {
-            heartContainer[singleElement].classList.add('unliked');
-            heartContainer[singleElement].classList.remove('liked');
-            setTimeout(unlikeRemover, 250);
-        }
-        else {
-            heartContainer[singleElement].classList.add('liked');
-            heartContainer[singleElement].classList.remove('unliked');
-        }
-
-        function unlikeRemover() {
-            heartContainer[singleElement].classList.remove('unliked');
-        }
-    });
-
-});
-}
 </script>
 }

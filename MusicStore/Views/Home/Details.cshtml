@@ -1,110 +1,165 @@
-﻿
-
-    <div class="container">
-        <div class="row">
-            <div class="col">
+﻿<div class="container">
+    <div class="row">
+        <div class="col">
             <h1 class="col text-center mt-5 fw-bold">Music Store</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <blockquote class="col-8 text-center text-muted">“Per me la musica è il colore. Non il dipinto. La mia musica mi permette di dipingere me stesso.”</blockquote>
+    </div>
+    <div class="row">
+            <div class="col centre row3">
+                - David Bowie
             </div>
         </div>
-        <div class="row justify-content-center">
-            <blockquote class="col-8 text-center text-muted">“Per me la musica è il colore. Non il dipinto. La mia musica mi permette di dipingere me stesso.”</blockquote>
-        </div>
-        <div class="row">
-                <div class="col centre row3">- David Bowie</div>
-            </div>
-      </div>
-      <div id="details_instruments">
+    </div>
+    <div id="details_instruments">
 
-      </div>
+    </div>
 
-
-      <form onsubmit="AcquistaStrumento(event)"  method="post">
-      <!-- data input -->
-        <div class="row p-2">
-
-            <div class="col-12">
-                <label for="Data">Data</label>
-                <input type="datetime-local" class="form-control" id="Data" placeholder="data">
-            </div>
-        </div>
-
-      <!-- Quantita input -->
-        <div class="row p-2">
-
-            <div class="col-12">
-                <label for="Quantita">Quantita</label>
-                <input type="number" class="form-control" id="Quantita" placeholder="Quantita">
-            </div>
-        </div>
-
-      
+      <!--<button type="button" class="btn btn-outline-danger fas fa-heart icon-wrapper btLike" onclick="likeHeart()">&#10084;</button>-->
       
 
-      <!-- Submit button -->
-      <button type="submit" class="btn btn-primary btn-block mb-4">Acquista</button>
-    </form>
+<form onsubmit="AcquistaStrumento(event)" method="post">
+    <!-- data input -->
+    <div class="row p-2">
 
-        @section Scripts {
+        <div class="col-12">
+            <label for="Data">Data</label>
+            <input type="datetime-local" class="form-control" id="Data" placeholder="data">
+        </div>
+    </div>
 
-        <script type="text/javascript">
+    <!-- Quantita input -->
+    <div class="row p-2">
 
-            var url = window.location.pathname;
-            var id = url.substring(url.lastIndexOf('/') + 1);
+        <div class="col-12">
+            <label for="Quantita">Quantita</label>
+            <input type="number" class="form-control" id="Quantita" placeholder="Quantita">
+        </div>
+    </div>
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-4">Acquista</button>
+</form>
+    
+@section Scripts {
 
-            detailsInstruments(id);
+<script type="text/javascript">
 
-            function detailsInstruments(parameterId){
-                axios.get('/api/Struments/Details/' + parameterId)
-                .then((result) => {
+var url = window.location.pathname;
+var id = url.substring(url.lastIndexOf('/') + 1);
 
-                    if (result.data.id == parameterId) {
-                        document.getElementById("details_instruments").innerHTML =
-                            `
-                        <div class="col-lg-4 col-md-6 col-xs-12 text-center">
-                          
-                                <div class="card my-3">
-                                    <img src="${result.data.foto}" class="img-fluid" alt="Image">
-                                    <div id="dettagliStrumento" class="card-body">
-                                        <h5 class="card-title">${result.data.nome}</h5>
-                                        <p class="card-text">${result.data.descrizione}</p>
-                                        <span class="btn btn-light text-dark border border-dark">Acquista</span>
-                                    </div>
-                                </div>
+detailsInstruments(id);
+
+function detailsInstruments(parameterId){
+    axios.get('/api/Struments/Details/' + parameterId)
+    .then((result) => {
+
+    if (result.data.id == parameterId) {
+        document.getElementById("details_instruments").innerHTML =
+        `
+        <div class="col-lg-4 col-md-6 col-xs-12 text-center">
+                <div class="card my-3">
+                    <img src="${result.data.foto}" class="img-fluid" alt="Image">
+                    <div id="dettagliStrumento" class="card-body">
+                        <h5 class="card-title">${result.data.nome}</h5>
+                        <p class="card-text">${result.data.descrizione}</p>
+                        <span class="btn btn-light text-dark border border-dark">Acquista</span>
+                        <div>
+                            <button type="button" class="btn btn-primary btn-block mb-4" onclick="AddLike(${result.data.id})">Like</button>
+                            <span id="span_to_remove" class="d-none">${result.data.numeroLike} mi piace</span>
                         </div>
-                        `
-                    }
-                    
-                    }).catch((error) => {
-                        console.log("C'è stato un errore: " + error);
+                    </div>
+                </div>
+        </div>
+        `
+    } 
+    }).catch((error) => {
+        console.log("C'è stato un errore: " + error);
 
-                    })
-               }
+    })
+}
 
-               function AcquistaStrumento(event){
-                   event.preventDefault();
+function AcquistaStrumento(event){
+    event.preventDefault();
 
-                   var Quantita = document.getElementById('Quantita').value;
-                   var Data = document.getElementById('Data').value;
-                   var idStrument = id;
+    var Quantita = document.getElementById('Quantita').value;
+    var Data = document.getElementById('Data').value;
+    var idStrument = id;
 
-                   var nuovoAcquisto = {
-                       Data : Data,
-                       Quantita : Quantita,
-                       StrumentoMusicaleId : id
-                   }
+    var nuovoAcquisto = {
+        Data : Data,
+        Quantita : Quantita,
+        StrumentoMusicaleId : id
+    }
 
-                   axios.post('/api/Struments/AcquistaStrumento/' + id, nuovoAcquisto
-                   ).then((result) => {
-                       alert("Messaggio inviato correttamente");
-                        window.location.assign(url);
+    axios.post('/api/Struments/AcquistaStrumento/' + id, nuovoAcquisto
+    ).then((result) => {
+        alert("Messaggio inviato correttamente");
+        window.location.assign(url);
 
-                   }).catch((error) => {
-                        console.log("Si è verificato un errore: " + error);
-                    })
+    }).catch((error) => {
+        console.log("Si è verificato un errore: " + error);
+    })
 
-               }
+}              
 
+function AddLike(id) 
+{
+        axios.post('/api/Like/AddLikeToInstruments', {
+                StrumentoMusicaleId : id,
+        })
+        .then((result) => {
+            console.log("Sta inviando i dati");
+        }).catch((error) => {
+            console.log("Errore" + error);
+        });
+}
 
-        </script>
+/*function likeHeart(){
 
+var heartContainer = document.getElementsByClassName('btLike');
+
+Object.keys(heartContainer).forEach(singleElement => {
+    
+    
+    heartContainer[singleElement].addEventListener('click', function() {
+        
+        var contatore = 0;
+    
+        if (heartContainer[singleElement].classList.contains('liked'))
+        {
+            heartContainer[singleElement].classList.add('unliked');
+            heartContainer[singleElement].classList.remove('liked');
+            setTimeout(unlikeRemover, 250);
+            contatore = -1;
         }
+        else 
+        {
+            heartContainer[singleElement].classList.add('liked');
+            heartContainer[singleElement].classList.remove('unliked');
+            contatore = 1;
+        }
+
+        var idPerLike = id;
+
+        axios.post('api/Like/AddLikeToInstruments', {
+            params: {
+                id : idPerLike,
+                numeroLike : contatore
+            }
+        })
+        .then((result) => {
+            console.log("Sta inviando i dati");
+        }).catch((error) => {
+            console.log("Errore" + error);
+        });
+
+            function unlikeRemover() {
+                heartContainer[singleElement].classList.remove('unliked');
+            }
+        });
+    });
+}*/
+</script>
+}
