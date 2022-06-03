@@ -38,17 +38,17 @@
                     <td>Nessuna Categoria Associata</td>
                 }
 
-                @if(strumentoMusicale.QuantitaStrumento > 0 && strumentoMusicale.QuantitaStrumento <= 10)
+                @if(strumentoMusicale.QuantitaStrumento <= 1)
                 {
-                    <td class="align-middle text-danger">@strumentoMusicale.QuantitaStrumento</td>
+                    <td class="align-middle bg-danger"><b>@strumentoMusicale.QuantitaStrumento</b></td>
                 }
-                else if(strumentoMusicale.QuantitaStrumento > 10 && strumentoMusicale.QuantitaStrumento <= 20)
+                else if(strumentoMusicale.QuantitaStrumento <= 10)
                 {
-                    <td class="align-middle text-warning">@strumentoMusicale.QuantitaStrumento</td>
+                    <td class="align-middle bg-warning"><b>@strumentoMusicale.QuantitaStrumento</b></td>
                 }
                 else
                 {
-                    <td class="align-middle">@strumentoMusicale.QuantitaStrumento</td>
+                    <td class="align-middle bg-success"><b>@strumentoMusicale.QuantitaStrumento</b></td>
                 }  
 
                 <td class="align-middle">@strumentoMusicale.Prezzo &euro;</td>
