@@ -83,7 +83,7 @@ namespace MusicStore.Controllers.Api
 
             using (MusicContext db = new MusicContext())
             {
-                StrumentoMusicale smFound = db.StrumentoMusicale
+                StrumentoMusicale? smFound = db.StrumentoMusicale
                     .Where(strumento => strumento.Id == id)
                     .FirstOrDefault();
 
