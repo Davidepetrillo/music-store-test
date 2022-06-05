@@ -15,7 +15,7 @@ namespace MusicStore.Controllers
         [HttpGet]
         public IActionResult Home()
         {
-            return View();
+            return View("HomePage");
         }
 
         [HttpGet]

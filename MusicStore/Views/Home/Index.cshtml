@@ -89,11 +89,17 @@ function loadStrument(parameter) {
                             <div id="dettagliStrumento" class="card-body">
                                 <h5 class="card-title">${strument.nome}</h5>
                                 <p class="card-text">${strument.descrizione}</p> 
-                                <h5>${strument.prezzo}&euro;</h5>
+                                <h5>${strument.prezzo}&euro;</h5>                               
                                 <span class="btn btn-light text-dark border border-dark">Acquista</span>
                             </div>
                         </div>
-                    </a>                 
+                    </a>
+                    <div>
+                        <button id="like" class="icon-wrapper" onclick="AddLike(${strument.id})">
+                            &#10084;<p class="fas fa-heart"></p>
+                        </button>
+                        <span id="span_to_remove">${strument.numeroLike} mi piace</span>
+                   </div>
                 </div> 
             `
         });
@@ -129,6 +135,40 @@ function loadClassifica() {
             
         }).catch ((Error) => {
             console.log(Error);
+        });
+}
+
+function AddLike(id) 
+{
+    var heartContainer = document.getElementsByClassName('icon-wrapper');
+
+Object.keys(heartContainer).forEach(singleElement => {          
+    
+        if (heartContainer[singleElement].classList.contains('liked'))
+        {
+            heartContainer[singleElement].classList.add('unliked');
+            heartContainer[singleElement].classList.remove('liked');
+            setTimeout(unlikeRemover, 250);
+        }
+        else 
+        {
+            heartContainer[singleElement].classList.add('liked');
+            heartContainer[singleElement].classList.remove('unliked');
+        }
+
+            function unlikeRemover() {
+                heartContainer[singleElement].classList.remove('unliked');
+            }
+    });
+
+        axios.post('/api/Like/AddLikeToInstruments', {
+                StrumentoMusicaleId : id,
+        })
+        .then((result) => {
+            console.log("Sta inviando i dati");
+
+        }).catch((error) => {
+            console.log("Errore" + error);
         });
 }
 
