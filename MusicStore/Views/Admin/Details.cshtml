@@ -1,43 +1,46 @@
 ﻿@model StrumentoMusicale
 
-<div class="container-fluid justify-content-center">
+<div class="container">
     <div class="row ">
-        <div class="col-xl-4 col-lg-12">
-            <div class="d-flex align-items-center">
+        <div class="col-12 col-lg-6">
+            <div class="d-flex text-center">
                 <h1 class="mt-3 mb-3">Dettagli Strumento</h1>
             </div>
-            <div class="post-single-image-container mx-5">
-                <img src="@Model.Foto" height="500" width="600" align="left"  >
+            <div class="card" style="width: 80%;">
+                
+                <img src="@Model.Foto" class="card-img-top" height="400" width="500">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <strong>Nome Strumento:</strong>
+                        @Model.Nome
+                    </h4>
+                    <h4>
+                        <strong>Contenuto:</strong>
+                        @Model.Descrizione  
+                    </h4>
+                     <h4>
+                        <strong>Prezzo:</strong>
+                        @Model.Prezzo &euro;
+                    </h4>
+                     <h4>
+                        <strong>Quantità:</strong>
+                        @Model.QuantitaStrumento
+                    </h4>
+                    <h4>
+                    <strong>Categoria:</strong>
+                        @if(Model.Categoria != null)
+                        {
+                            <span>@Model.Categoria.nomeCategoria</span>
+                        }else
+                        {
+                            <span>Nessuna Categoria Associata</span>
+                        }
+                    </h4>
+                </div>
             </div>
-            <h4>
-                <strong>Nome Strumento:</strong>
-                @Model.Nome
-            </h4>
-            <h4>
-                <strong>Contenuto:</strong>
-                @Model.Descrizione  
-            </h4>
-             <h4>
-                <strong>Prezzo:</strong>
-                @Model.Prezzo &euro;
-            </h4>
-             <h4>
-                <strong>Quantità:</strong>
-                @Model.QuantitaStrumento
-            </h4>
-            <h4>
-            <strong>Categoria:</strong>
-                @if(Model.Categoria != null)
-                {
-                    <span>@Model.Categoria.nomeCategoria</span>
-                }else
-                {
-                    <span>Nessuna Categoria Associata</span>
-                }
-            </h4>
         </div>
-        <div  id="TabDet"  class="col-xl-4 col-lg-12  ">
-            <h2>Tabella Rifornimenti</h2>
+        <div class="col-12 col-lg-6">
+            <h1 class="mt-3 mb-3">Tabella Rifornimenti</h1>
             <!--Se non ci sono richieste restituisce H2 altrimenti una table dei rifornimenti effettuati-->
             @if(@Model.Rifornisci == null)
             {
