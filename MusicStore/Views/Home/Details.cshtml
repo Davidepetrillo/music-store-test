@@ -10,10 +10,10 @@
         <blockquote class="col-8 text-center text-muted">“Per me la musica è il colore. Non il dipinto. La mia musica mi permette di dipingere me stesso.”</blockquote>
     </div>
     <div class="row">
-            <div class="col centre row3">
-                - David Bowie
-            </div>
+        <div class="col centre row3">
+            - David Bowie
         </div>
+    </div>
 </div>
 
     <br />
@@ -54,15 +54,15 @@
 
 var url = window.location.pathname;
 var id = url.substring(url.lastIndexOf('/') + 1);
+var contatore = 0;
 
 detailsInstruments(id);
 
 function detailsInstruments(parameterId){
     axios.get('/api/Struments/Details/' + parameterId)
     .then((result) => {
-
     if (result.data.id == parameterId) {
-
+        
         document.getElementById("details_instruments").innerHTML =
         `        
          <img src="${result.data.foto}" class="img-fluid" alt="Image" >
@@ -73,10 +73,11 @@ function detailsInstruments(parameterId){
         <p class="card-text">${result.data.descrizione}</p>
         <h5>${result.data.prezzo}&euro;</h5>                       
         <div class="d-inline-flex mt-1">
-            <button id="like" class="icon-wrapper m-0" onclick="AddLike(${result.data.id})">
+            <button id="like" class="icon-wrapper mr-2 m-0" onclick="AddLike(${result.data.id})">
                 &#10084;<span class="fas fa-heart"></span>                
             </button>
-            <span class="mx-2 my-1" id="span_to_remove">${result.data.numeroLike} mi piace</span>
+            <span class="mx-1 my-1" id="span_like">${result.data.numeroLike} </span>
+            <span class="my-1"> mi piace</span> 
         </div>
         `     
     } 
@@ -112,43 +113,43 @@ function AddLike(id)
 {
     var heartContainer = document.getElementsByClassName('icon-wrapper');
     var state;
-Object.keys(heartContainer).forEach(singleElement => {          
 
-        if (heartContainer[singleElement].classList.contains('liked'))
-        {
-            heartContainer[singleElement].classList.add('unliked');
-            heartContainer[singleElement].classList.remove('liked');
-            setTimeout(unlikeRemover, 250);
-            state = true;
-        }
-        else 
-        {
-            heartContainer[singleElement].classList.add('liked');
+Object.keys(heartContainer).forEach(singleElement => {              
+    if (heartContainer[singleElement].classList.contains('liked'))
+    {
+        heartContainer[singleElement].classList.add('unliked');
+        heartContainer[singleElement].classList.remove('liked');
+        setTimeout(unlikeRemover, 250);
+        state = true;
+        contatore = -1;
+    }
+    else 
+    {
+        heartContainer[singleElement].classList.add('liked');
+        heartContainer[singleElement].classList.remove('unliked');
+        state = false;
+        contatore = 1;
+    }   
+        function unlikeRemover() {
             heartContainer[singleElement].classList.remove('unliked');
-            state = false;
         }
-
-            function unlikeRemover() {
-                heartContainer[singleElement].classList.remove('unliked');
-            }
-    });
-
-        axios.post('/api/Like/AddLikeToInstruments', {
-                StrumentoMusicaleId : id,
-                Status : state
-        })
+    
+});
+    axios.post('/api/Like/AddLikeToInstruments', {
+        StrumentoMusicaleId: id,
+        Status: state,
+    })
         .then((result) => {
             console.log("Sta inviando i dati");
-            console.log(result);
 
-            /*setTimeout(function(){
-            window.location.reload();
-            }, 5000);*/
+            var somma = parseInt(document.getElementById('span_like').innerHTML);
+            var totale = somma + contatore;
+            document.getElementById('span_like').innerHTML = totale;
 
-        }).catch((error) => {
-            console.log("Errore" + error);
-        });
+
+    }).catch((error) => {
+        console.log("Errore" + error);
+    });
 }
-
 </script>
 }
