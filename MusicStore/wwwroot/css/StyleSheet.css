@@ -17,6 +17,11 @@ a {
     margin-bottom: 100px;
 }
 
+#TabDet {
+    position:absolute;
+    right: 550px;
+    
+}
 
 /*-----------------------------------------------------*/
 

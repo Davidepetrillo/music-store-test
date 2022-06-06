@@ -1,13 +1,13 @@
 ﻿@model StrumentoMusicale
 
 <div class="container-fluid justify-content-center">
-    <div class="row justify-content-center">
+    <div class="row ">
         <div class="col-xl-4 col-lg-12">
             <div class="d-flex align-items-center">
                 <h1 class="mt-3 mb-3">Dettagli Strumento</h1>
             </div>
             <div class="post-single-image-container mx-5">
-                <img src="@Model.Foto" height="500" width="600">
+                <img src="@Model.Foto" height="500" width="600" align="left"  >
             </div>
             <h4>
                 <strong>Nome Strumento:</strong>
@@ -36,7 +36,7 @@
                 }
             </h4>
         </div>
-        <div class="col-xl-4 col-lg-12">
+        <div  id="TabDet"  class="col-xl-4 col-lg-12  ">
             <h2>Tabella Rifornimenti</h2>
             <!--Se non ci sono richieste restituisce H2 altrimenti una table dei rifornimenti effettuati-->
             @if(@Model.Rifornisci == null)
@@ -45,7 +45,7 @@
             }
             else
             {
-                <table class="table align-middle">
+                <table class="table align-right">
                     <thead>
                         <tr>
                         <th scope="col">Nome Rifornitore</th>
