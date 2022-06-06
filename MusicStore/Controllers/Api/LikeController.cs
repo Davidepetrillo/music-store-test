@@ -32,10 +32,8 @@ namespace MusicStore.Controllers.Api
                         else
                         {
                             smFound.NumeroLike--;
-                        }
-                        
-                    }
-                            
+                        }   
+                    }   
                     database.SaveChanges(); 
                 }
                 return Ok();
