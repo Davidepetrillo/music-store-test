@@ -83,23 +83,23 @@ function loadStrument(parameter) {
             document.getElementById('struments_output').innerHTML +=
             `
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-3 text-center">
-                    <a href="/Home/Details/${strument.id}">
                         <div class="card">
+                    <a href="/Home/Details/${strument.id}">
                             <img src="${strument.foto}" class=" card-img-top" alt="Image" width=200 height="300">
-                            <div id="dettagliStrumento" class="card-body">
-                                <h5 class="card-title">${strument.nome}</h5>
-                                <p class="card-text">${strument.descrizione}</p> 
-                                <h5>${strument.prezzo}&euro;</h5>                               
-                                <span class="btn btn-light text-dark border border-dark">Acquista</span>
+                    </a>
+                    <div id="dettagliStrumento" class="card-body">
+                    <h5 class="card-title">${strument.nome}</h5>
+                      <p class="card-text">${strument.descrizione}</p> 
+                    <h5>${strument.prezzo}&euro;</h5>   
+                     <div class="d-inline-flex"">
+                     <button id="like" class="icon-wrapper mx-0" onclick="AddLike(${strument.id})">
+                       &#10084;<p class="fas fa-heart"></p>
+                      </button>
+                   <span id="span_to_remove" class="mx-2 my-1">${strument.numeroLike} mi piace</span>
+                   </div>
                             </div>
                         </div>
-                    </a>
-                    <div>
-                        <button id="like" class="icon-wrapper" onclick="AddLike(${strument.id})">
-                            &#10084;<p class="fas fa-heart"></p>
-                        </button>
-                        <span id="span_to_remove">${strument.numeroLike} mi piace</span>
-                   </div>
+                    
                 </div> 
             `
         });
