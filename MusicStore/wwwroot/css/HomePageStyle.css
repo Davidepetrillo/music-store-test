@@ -38,11 +38,14 @@
     }
 
 
+
+
 .image-area {
     position: relative;
     width: 50%;
     height: 100vh;
 }
+
 
     .image-area img {
         position: absolute;
