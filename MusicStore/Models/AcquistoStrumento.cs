@@ -13,12 +13,7 @@ namespace MusicStore.Models
 
         public AcquistoStrumento()
         {
-
+            
         }
-
-
-
     }
-
-   
 }
