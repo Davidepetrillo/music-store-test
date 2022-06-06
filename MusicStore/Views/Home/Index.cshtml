@@ -33,9 +33,26 @@
                 <h3>Strumenti piu' venduti nell'ultimo mese</h3>
             </div>
         </div>
-        <div id="classifica" class="row">
+     </div>
+       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="~/css/img/OIP.jpg" class="d-block img-fluid" alt="...">
+          </div>
+          <div id="classifica">
 
+          </div>
+          
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+    </div>
         
     </div>
 </section>
@@ -82,7 +99,7 @@ function loadStrument(parameter) {
 
             document.getElementById('struments_output').innerHTML +=
             `
-                <div class="col-12 col-sm-6 col-lg-4 col-xl-3 text-center">
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-3 text-center my-4">
                         <div class="card">
                     <a href="/Home/Details/${strument.id}">
                             <img src="${strument.foto}" class=" card-img-top" alt="Image" width=200 height="300">
@@ -121,14 +138,10 @@ function loadClassifica() {
             result.data.forEach(strument => {
                 document.getElementById('classifica').innerHTML +=
             `
-                <div class="col-12 col-md-6 col-xs-4 text-center">
-                    <div class="card">
-                    <img src="${strument.fotoStrumento}" class="card-img-fluid" alt="Image" >
-                        <h5 class="card-title">${strument.nomeStrumento}</h5>
-                        <p class="card-text">${strument.quantitaAcquistata}</p>
-                        <a href="#" class="btn btn-light text-dark border border-dark stretched-link">acquista</a>
-                    </div>       
-                </div>                
+            <div class="carousel-item" id="classifica">
+                <img src="${strument.fotoStrumento}" class="d-block img-fluid" alt="...">
+            </div>
+                              
             `
             });
             
