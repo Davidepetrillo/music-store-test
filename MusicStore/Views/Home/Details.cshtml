@@ -1,7 +1,9 @@
-﻿<div class="container">
+﻿<link href="~/css/ZoomImage.css" rel="stylesheet" />
+
+<div class="container-fluid mb-5">
     <div class="row">
         <div class="col">
-            <h1 class="col text-center mt-5 fw-bold">Music Store</h1>
+            <h1 class="col text-center fw-bold">Music Store</h1>
         </div>
     </div>
     <div class="row justify-content-center">
@@ -15,45 +17,33 @@
     </div>
     <br />
     <br />
-<div class="container">
+<div id="dettaglio" class="container-fluid">
     <div class="row">
-
         <div class="col-12 col-md-6 col-sm-8 text-center mb-2" id="details_instruments">
 
         </div>
-
         <div class="col-12 col-md-6 col-sm-4">
-
             <div id="descrizione_strumento">
 
             </div>
-
-        
-                <form onsubmit="AcquistaStrumento(event)" method="post">
-            <!-- data input -->
-        
-
-                    <div class="col-12">
-                        <label for="Data">Data</label>
-                        <input type="datetime-local" class="form-control" id="Data" placeholder="data">
-                    </div>
-        
-
-            <!-- Quantita input -->
-        
-
-                    
-                <div class="col-12">
-                    <label for="Quantita">Quantita</label>
-                    <input type="number" min="1" max="50" class="form-control" id="Quantita" placeholder="Quantita">
+            <form onsubmit="AcquistaStrumento(event)" class="my-4" method="post">
+                <!-- data input -->
+                <div class="col-12 mb-3">
+                    <label for="Data">Data</label>
+                    <input type="datetime-local" class="form-control w-50" id="Data" placeholder="data">
                 </div>
+
+            <!-- Quantita input -->      
+            <div class="col-12 mb-3">
+                <label for="Quantita">Quantita</label>
+                <input type="number" min="1" max="50" class="form-control w-50" id="Quantita" placeholder="Quantita">
+            </div>
        
                 <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-4">Acquista</button>
+                <button type="submit" class="btn btn-dark btn-block mb-4">Acquista</button>
             </form>
         </div>
     </div>
-
 </div>
 
     
@@ -75,34 +65,24 @@ function detailsInstruments(parameterId){
     if (result.data.id == parameterId) {
 
         document.getElementById("details_instruments").innerHTML =
-        `
-        
-                
-                    <img src="${result.data.foto}" class="img-fluid" alt="Image" >
+        `        
+         <img src="${result.data.foto}" class="img-fluid" alt="Image" >
         `          
         document.getElementById("descrizione_strumento").innerHTML =
-
-        `
-                
-                <h5 class="card-title">${result.data.nome}</h5>
-                <p class="card-text">${result.data.descrizione}</p>
-                <h5>${result.data.prezzo}&euro;</h5>
-                        
-                <div>
-                    <button id="like" class="icon-wrapper" onclick="AddLike(${result.data.id})">
-                      &#10084;<p class="fas fa-heart"></p>
-                    </button>
-                    <span id="span_to_remove">${result.data.numeroLike} mi piace</span>
-                </div>
-        `
-                    
-               
-        
-        
+        `      
+        <h5 class="card-title">${result.data.nome}</h5>
+        <p class="card-text">${result.data.descrizione}</p>
+        <h5>${result.data.prezzo}&euro;</h5>                       
+        <div class="d-inline-flex mt-1">
+            <button id="like" class="icon-wrapper m-0" onclick="AddLike(${result.data.id})">
+                &#10084;<span class="fas fa-heart"></span>                
+            </button>
+            <span class="mx-2 my-1" id="span_to_remove">${result.data.numeroLike} mi piace</span>
+        </div>
+        `     
     } 
     }).catch((error) => {
         console.log("C'è stato un errore: " + error);
-
     })
 }
 
@@ -127,17 +107,13 @@ function AcquistaStrumento(event){
     }).catch((error) => {
         console.log("Si è verificato un errore: " + error);
     })
-
 }              
-
 
 function AddLike(id) 
 {
     var heartContainer = document.getElementsByClassName('icon-wrapper');
     var state;
 Object.keys(heartContainer).forEach(singleElement => {          
-        
-        
 
         if (heartContainer[singleElement].classList.contains('liked'))
         {
@@ -157,8 +133,6 @@ Object.keys(heartContainer).forEach(singleElement => {
                 heartContainer[singleElement].classList.remove('unliked');
             }
     });
-
-        
 
         axios.post('/api/Like/AddLikeToInstruments', {
                 StrumentoMusicaleId : id,
