@@ -22,7 +22,7 @@ namespace MusicStore.Models
         public string Foto { get; set; }
 
         [Required(ErrorMessage = "Campo obbligatorio")]
-        [Range(20, 10000, ErrorMessage = "Lo strumento non puo' costare meno di 20 euro")] 
+        [Range(20, 100000, ErrorMessage = "Lo strumento non puo' costare meno di 20 euro o più di 100.000 euro")] 
         public decimal Prezzo { get; set; }
 
         [Required(ErrorMessage = "Campo obbligatorio")]
