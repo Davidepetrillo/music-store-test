@@ -28,7 +28,7 @@ namespace MusicStore.Models
         [Required(ErrorMessage = "Campo obbligatorio")]
         public int QuantitaStrumento { get; set; }
 
-        public int? NumeroLike { get; set; }
+        public int NumeroLike { get; set; }
 
         //-------------Relazione DB-------------
         public Categoria? Categoria { get; set; }
@@ -54,8 +54,9 @@ namespace MusicStore.Models
             this.Foto = foto;
             this.Prezzo = prezzo;
             this.QuantitaStrumento = quantitaStrumento;
-            this.NumeroLike = numeroLike;
             numeroLike = 0;
+            this.NumeroLike = numeroLike;
+            
         }
     }
 }
