@@ -55,7 +55,8 @@
                         <th scope="col">Quantita</th>
                         <th scope="col">Data</th>
                         <th scope="col">Nome Strumento</th>
-                        <th scope="col">Prezzo</th>
+                        <th scope="col">Prezzo Unitario</th>
+                        <th scope="col">Prezzo Totale</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,7 +68,8 @@
                         <td class="align-middle">@rifornimento.Quantita</td>
                         <td class="align-middle">@rifornimento.Data</td>
                         <td class="align-middle">@rifornimento.strumentoMusicale.Nome</td>
-                        <td class="align-middle">@rifornimento.strumentoMusicale.Prezzo</td>
+                        <td class="align-middle">@rifornimento.strumentoMusicale.Prezzo &euro;</td>
+                        <td class="align-middle">@(rifornimento.strumentoMusicale.Prezzo * rifornimento.Quantita) &euro;</td>
                     </tr>
                 }
                     </tbody>

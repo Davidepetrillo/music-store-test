@@ -95,7 +95,7 @@ namespace MusicStore.Controllers
                 StrumentoDaCreare.Descrizione = nuovoStrumentoMusicale.StrumentiMusicali.Descrizione;
                 StrumentoDaCreare.Foto = nuovoStrumentoMusicale.StrumentiMusicali.Foto;
                 StrumentoDaCreare.Prezzo = nuovoStrumentoMusicale.StrumentiMusicali.Prezzo;
-                StrumentoDaCreare.QuantitaStrumento = nuovoStrumentoMusicale.StrumentiMusicali.QuantitaStrumento;
+                //StrumentoDaCreare.QuantitaStrumento = nuovoStrumentoMusicale.StrumentiMusicali.QuantitaStrumento;
                 StrumentoDaCreare.CategoriaId = nuovoStrumentoMusicale.StrumentiMusicali.CategoriaId;
                
                 db.StrumentoMusicale.Add(StrumentoDaCreare);
@@ -191,7 +191,7 @@ namespace MusicStore.Controllers
                     strumentoDaModificare.Descrizione = model.StrumentiMusicali.Descrizione;
                     strumentoDaModificare.Foto = model.StrumentiMusicali.Foto;
                     strumentoDaModificare.Prezzo = model.StrumentiMusicali.Prezzo;
-                    strumentoDaModificare.QuantitaStrumento = model.StrumentiMusicali.QuantitaStrumento;
+                    //strumentoDaModificare.QuantitaStrumento = model.StrumentiMusicali.QuantitaStrumento;
                     strumentoDaModificare.CategoriaId = model.StrumentiMusicali.CategoriaId;
 
                     context.SaveChanges();
