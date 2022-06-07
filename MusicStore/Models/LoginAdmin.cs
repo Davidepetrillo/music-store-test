@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MusicStore.Validate;
+using System.ComponentModel.DataAnnotations;
 
 namespace MusicStore.Models
 {
@@ -6,7 +7,9 @@ namespace MusicStore.Models
     {
         [Key]
         public string UserName { get; set; }
+        
         [Required]
+        [VaidationPassword]
         public string Password { get; set; }
     }
 }
