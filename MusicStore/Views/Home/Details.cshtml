@@ -56,6 +56,7 @@ var url = window.location.pathname;
 var id = url.substring(url.lastIndexOf('/') + 1);
 var contatore = 0;
 
+
 detailsInstruments(id);
 
 function detailsInstruments(parameterId){
@@ -102,7 +103,8 @@ function AcquistaStrumento(event){
     axios.post('/api/Struments/AcquistaStrumento/' + id, nuovoAcquisto
     ).then((result) => {
         alert("Messaggio inviato correttamente");
-        window.location.assign(url);
+       var url2 ="https://localhost:7286/Home/Index"
+        window.location.assign(url2);
 
     }).catch((error) => {
         console.log("Si è verificato un errore: " + error);
