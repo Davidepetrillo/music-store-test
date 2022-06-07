@@ -1,4 +1,7 @@
-﻿<!--Intestazione-->
+﻿
+<link href="~/css/BoxShadow.css" rel="stylesheet"/>
+
+<!--Intestazione-->
 <div class="container-fluid mt-3 mb-2">
     <div class="row text-center">
         <div class="col-12">
@@ -33,17 +36,33 @@
                 <h3>Strumenti più venduti nell'ultimo mese</h3>
             </div>
         </div>
-        <div id="classifica" class="row">
+     </div>
+       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="~/css/img/OIP.jpg" class="d-block img-fluid" alt="...">
+          </div>
+          <div id="classifica">
 
+          </div>
+          
         </div>
-        
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
     </div>
+        
 </section>
 
 <!--Sezione degli Scripts-->
 @section Scripts  {
 <script type="text/javascript">
-
+    var contatore = 0;
 //Aggiungiamo evento di keyup richiamando la funzione di ricerca della stringa
 document.getElementById('search_struments').addEventListener('keyup', searchParameter);
 
@@ -78,29 +97,29 @@ function loadStrument(parameter) {
             document.getElementById('wait_struments').classList.add('d-none');
             document.getElementById('struments_output').classList.remove('d-none');
 
-            result.data.forEach(strument => {   
-
-            document.getElementById('struments_output').innerHTML +=
-            `
-                <div class="col-12 col-sm-6 col-lg-4 col-xl-3 text-center">
-                        <div class="card">
+            result.data.forEach(strument => {
+                console.log(strument);
+                    document.getElementById('struments_output').innerHTML +=
+                        `
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-3 text-center my-4">
+                <div class="card">
                     <a href="/Home/Details/${strument.id}">
-                            <img src="${strument.foto}" class=" card-img-top" alt="Image" width=200 height="300">
+                        <img src="${strument.foto}" class=" card-img-top" alt="Image" width=200 height="300">
                     </a>
                     <div id="dettagliStrumento" class="card-body">
-                    <h5 class="card-title">${strument.nome}</h5>
-                      <p class="card-text">${strument.descrizione}</p> 
-                    <h5>${strument.prezzo}&euro;</h5>   
-                     <div class="d-inline-flex"">
-                     <button id="like" class="icon-wrapper mx-0" onclick="AddLike(${strument.id})">
-                       &#10084;<p class="fas fa-heart"></p>
-                      </button>
-                   <span id="span_to_remove" class="mx-2 my-1">${strument.numeroLike} mi piace</span>
-                   </div>
-                            </div>
-                        </div>
-                    
-                </div> 
+                        <h5 class="card-title">${strument.nome}</h5>
+                        <p class="card-text">${strument.descrizione}</p> 
+                        <h5>${strument.prezzo}&euro;</h5>   
+                    <div class="d-inline-flex"">
+                        <button id="like" class="icon-wrapper mx-0" onclick="AddLike(${strument.id})">
+                        &#10084;<p class="fas fa-heart"></p>
+                        </button>
+                        <span id="span_like" class="mx-1 my-1">${strument.numeroLike}</span>
+                        <span class="my-1"> mi piace</span>
+                    </div>
+                    </div>
+                </div>   
+            </div> 
             `
         });
         }
@@ -115,24 +134,16 @@ function loadClassifica() {
 
     axios.get('/api/Struments/GetClassifica')
         .then((result) => {
-            console.log(result);
-            console.log(result.data);
-
 
             result.data.forEach(strument => {
                 document.getElementById('classifica').innerHTML +=
             `
-                <div class="col-12 col-md-6 col-xs-4 text-center">
-                    <div class="card">
-                    <img src="${strument.fotoStrumento}" class="card-img-fluid" alt="Image" >
-                        <h5 class="card-title">${strument.nomeStrumento}</h5>
-                        <p class="card-text">${strument.quantitaAcquistata}</p>
-                        <a href="#" class="btn btn-light text-dark border border-dark stretched-link">acquista</a>
-                    </div>       
-                </div>                
+            <div class="carousel-item" id="classifica">
+                <img src="${strument.fotoStrumento}" class="d-block img-fluid" alt="...">
+            </div>
+                              
             `
-            });
-            
+            });            
         }).catch ((Error) => {
             console.log(Error);
         });
@@ -141,35 +152,41 @@ function loadClassifica() {
 function AddLike(id) 
 {
     var heartContainer = document.getElementsByClassName('icon-wrapper');
+    var state;
 
-Object.keys(heartContainer).forEach(singleElement => {          
     
-        if (heartContainer[singleElement].classList.contains('liked'))
-        {
-            heartContainer[singleElement].classList.add('unliked');
-            heartContainer[singleElement].classList.remove('liked');
-            setTimeout(unlikeRemover, 250);
-        }
-        else 
-        {
-            heartContainer[singleElement].classList.add('liked');
-            heartContainer[singleElement].classList.remove('unliked');
-        }
-
-            function unlikeRemover() {
-                heartContainer[singleElement].classList.remove('unliked');
-            }
-    });
-
-        axios.post('/api/Like/AddLikeToInstruments', {
-                StrumentoMusicaleId : id,
-        })
+Object.keys(heartContainer).forEach(singleElement => {  
+    if (heartContainer[singleElement].classList.contains('liked')) {
+        heartContainer[singleElement].classList.add('unliked');
+        heartContainer[singleElement].classList.remove('liked');
+        setTimeout(unlikeRemover, 250);
+        state = true;
+        contatore = -1;
+    }
+    else {
+        heartContainer[singleElement].classList.add('liked');
+        heartContainer[singleElement].classList.remove('unliked');
+        state = false;
+        contatore = 1;
+    }
+    function unlikeRemover() {
+        heartContainer[singleElement].classList.remove('unliked');
+    }
+});
+    axios.post('/api/Like/AddLikeToInstruments', {
+        StrumentoMusicaleId: id,
+        Status: state,
+    })
         .then((result) => {
-            console.log("Sta inviando i dati");
 
-        }).catch((error) => {
-            console.log("Errore" + error);
-        });
+            var somma = parseInt(document.getElementById('span_like').innerHTML);
+            var totale = somma + contatore;
+            document.getElementById('span_like').innerHTML = totale;
+
+
+    }).catch((error) => {
+        console.log("Errore" + error);
+    });
 }
 </script>
 }

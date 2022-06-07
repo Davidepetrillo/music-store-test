@@ -31,11 +31,7 @@ namespace MusicStore.Controllers
                     .Where(data => data.UserName == loginModel.UserName && data.Password == loginModel.Password)
                     .FirstOrDefault();
 
-                if (status != null)
-                {
-                    ViewBag.Message = "Successfull login";
-                }
-                else
+                if (status == null)
                 {
                     ViewBag.Message = "Invalid login detail.";
                 }
