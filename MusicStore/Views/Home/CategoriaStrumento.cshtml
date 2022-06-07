@@ -1,0 +1,65 @@
+﻿<section>
+    <div class="container mt-3 mb-3">
+        <!--Pagina in attesa -->
+        <div id="wait_struments" class="row text-center">
+              <div class="text-center">
+                 <div class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+                 </div>
+              </div>
+        </div>
+        <!--Pagina con strumenti-->
+        <div id="struments_output" class="row my-3 d-none">
+
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script type="text/javascript">
+
+    var url = window.location.pathname;
+    var id = url.substring(url.lastIndexOf('/') + 1);
+
+CaetgoriaStrumento(id);
+    
+function CaetgoriaStrumento(parameterId) {
+    axios.get('/api/Struments/CategoriaStrumento/' + parameterId)
+        .then((result) => {
+            console.log(result.data)
+            if (result.data != null) {
+                document.getElementById('wait_struments').classList.add('d-none');
+                document.getElementById('struments_output').classList.remove('d-none');
+
+                result.data.forEach(strument => {
+                    //console.log(strument);
+                    document.getElementById('struments_output').innerHTML +=
+                        `                       
+                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 text-center my-4">
+                            <div class="card" style="width: 17rem; height: 30rem;">
+                                <a href="/Home/Details/${strument.id}" name="${strument.nome}" class="streched-link">
+                                    <img src="${strument.foto}" class=" card-img-top" alt="Image" width=200 height="300">
+                                </a>
+                                <div id="dettagliStrumento" class="card-body">
+                                    <h5 class="card-title">${strument.nome}</h5>
+                        
+                                    <h5>${strument.prezzo}&euro;</h5>                      
+                                    <span id="span_like" class="my-1">${strument.numeroLike}</span>
+                                    <span class="text-danger"> &hearts;</span>
+                                </div>
+                            </div>   
+                        </div> 
+                        `
+                });
+        } else {
+                document.getElementById('wait_struments').classList.add('d-none');
+            }
+        }).catch((error) => {
+        console.log("Errore" + error);
+    });
+}
+
+    
+    
+    </script>
+}

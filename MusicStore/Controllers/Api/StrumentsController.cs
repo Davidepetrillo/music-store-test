@@ -38,6 +38,50 @@ namespace MusicStore.Controllers.Api
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IActionResult GetCategories()
+        {
+            List<Categoria> categorias = new List<Categoria>();
+
+            using (MusicContext context = new MusicContext())
+            {
+                    categorias = context.Categoria
+                    .ToList<Categoria>();                
+            }
+
+            return Ok(categorias);
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(StrumentoMusicale), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult CategoriaStrumento(int id)
+        {
+            
+            //Troviamo l'id corrispondente allo strumento con lo stesso id
+            //Ritorniamo quello strumento oppure NOTFOUND
+            using (MusicContext context = new MusicContext())
+            {
+                List<StrumentoMusicale> strumentos = new List<StrumentoMusicale>();
+
+                strumentos = context.StrumentoMusicale
+                    .Include(x => x.Categoria)
+                    .Where(strument => strument.CategoriaId == id)
+                    .ToList<StrumentoMusicale>();
+
+                if(strumentos == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(strumentos);
+                }
+
+            }
+        }
+
+        [HttpGet]
         public IActionResult GetClassifica()
         {
 

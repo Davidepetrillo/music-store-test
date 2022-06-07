@@ -1,8 +1,8 @@
 ﻿@model LoginAdmin
 
 @using (Html.BeginForm("Login", "Admin"))
-{      
-    <div class="container-fluid ">
+{         
+    	<div class="container-fluid ">
         <form action="@Url.Action("Login", "Admin")" method="post" autocomplete="off">
         @Html.AntiForgeryToken()
             <h2>Admin Login</h2>
@@ -26,3 +26,4 @@
         </form>
     </div>
 }
+

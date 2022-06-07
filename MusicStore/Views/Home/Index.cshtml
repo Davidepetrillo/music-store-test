@@ -1,6 +1,24 @@
-﻿
-<link href="~/css/BoxShadow.css" rel="stylesheet"/>
+﻿<link href="~/css/BoxShadow.css" rel="stylesheet"/>
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+        <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+            <div id="lista_categorie" class="navbar-nav">
+            </div>
+        </div>
+    </div>
+</nav>
 <!--Intestazione-->
 <div class="container-fluid mt-3 mb-2">
     <div class="row text-center">
@@ -68,6 +86,7 @@ document.getElementById('search_struments').addEventListener('keyup', searchPara
 
 searchParameter();
 loadClassifica();
+loadCategorie();
 
 //Funzione che cerca la stringa in base al valore associato nella barra di ricerca
 //richiamando la funzione che carica le card degli strumenti
@@ -86,7 +105,7 @@ function loadStrument(parameter) {
             searchString : parameter
         }
     }).then((result) => {
-        console.log(result);
+        //console.log(result);
 
         if (result.data.lenght == 0) 
         {
@@ -98,11 +117,11 @@ function loadStrument(parameter) {
             document.getElementById('struments_output').classList.remove('d-none');
 
             result.data.forEach(strument => {
-                console.log(strument);
+                //console.log(strument);
                     document.getElementById('struments_output').innerHTML +=
                         `
             <div class="col-12 col-sm-6 col-lg-4 col-xl-3 text-center my-4">
-                <div class="card" style="width: 19rem; height: 30rem;">
+                <div class="card" style="width: 17rem; height: 30rem;">
                     <a href="/Home/Details/${strument.id}" name="${strument.nome}" class="streched-link">
                         <img src="${strument.foto}" class=" card-img-top" alt="Image" width=200 height="300">
                     </a>
@@ -122,7 +141,32 @@ function loadStrument(parameter) {
     console.log(error);
     });
 }
+function loadCategorie() {
+    document.getElementById('lista_categorie').innerHTML = '';
 
+    axios.get('/api/Struments/GetCategories')
+        .then((result) => {
+            if (result.data == 0) 
+            {
+                document.getElementById('lista_categorie').innerHTML +=
+                    `
+                    <h2>Non ci sono categorie</h2>
+                `
+            } 
+            else 
+            {
+            result.data.forEach(categoria => {
+                console.log(categoria.data);
+                document.getElementById('lista_categorie').innerHTML +=
+                `
+                    <a class="nav-link mx-3" href="/Home/CategoriaStrumento/${categoria.id}"><b>${categoria.nomeCategoria}</b></a>
+                `
+            });
+        }
+        }).catch((error) => {
+            console.log(error)
+        });
+}
 function loadClassifica() {
 
     document.getElementById('classifica').innerHTML = '';

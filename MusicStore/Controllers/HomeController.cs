@@ -17,7 +17,11 @@ namespace MusicStore.Controllers
         {
             return View("HomePage");
         }
-
+        [HttpGet]
+        public IActionResult CategoriaStrumento(int id)
+        {
+            return View("CategoriaStrumento", id);
+        }
         [HttpGet]
         public IActionResult Details(int id)
         {
