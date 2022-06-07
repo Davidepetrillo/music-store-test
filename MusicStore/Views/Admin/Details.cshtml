@@ -6,14 +6,14 @@
             <div class="d-flex text-center">
                 <h1 class="mt-3 mb-3">Dettagli Strumento</h1>
             </div>
-            <div class="card" style="width: 80%;">
+            <div class="card shadow p-3 mb-5 bg-white rounded border border-dark" style="width: 80%;">
                 
                 <img src="@Model.Foto" class="card-img-top" height="400" width="500">
                 <div class="card-body">
                     <h4 class="card-title">
                         <strong>Nome Strumento:</strong>
                         @Model.Nome
-                    </h4>
+                    </h4> 
                     <h4>
                         <strong>Contenuto:</strong>
                         @Model.Descrizione  
@@ -48,7 +48,7 @@
             }
             else
             {
-                <table class="table align-middle">
+                <table class="table align-right">
                     <thead>
                         <tr>
                         <th scope="col">Nome Rifornitore</th>
