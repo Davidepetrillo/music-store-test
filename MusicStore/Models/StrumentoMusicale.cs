@@ -22,8 +22,8 @@ namespace MusicStore.Models
         public string Foto { get; set; }
 
         [Required(ErrorMessage = "Campo obbligatorio")]
-        [Range(20, 10000, ErrorMessage = "Lo strumento non puo' costare meno di 20 euro")]
-        public double Prezzo { get; set; }
+        [Range(20, 10000, ErrorMessage = "Lo strumento non puo' costare meno di 20 euro")] 
+        public decimal Prezzo { get; set; }
 
         [Required(ErrorMessage = "Campo obbligatorio")]
         public int QuantitaStrumento { get; set; }
@@ -47,12 +47,13 @@ namespace MusicStore.Models
             
         }
 
-        public StrumentoMusicale(string nome, string descrizione, string foto, double prezzo, int quantitaStrumento, int numeroLike)
+        public StrumentoMusicale(string nome, string descrizione, string foto, decimal prezzo, int quantitaStrumento, int numeroLike)
         {
             this.Nome = nome;
             this.Descrizione = descrizione;
             this.Foto = foto;
             this.Prezzo = prezzo;
+            quantitaStrumento = 0;
             this.QuantitaStrumento = quantitaStrumento;
             numeroLike = 0;
             this.NumeroLike = numeroLike;
