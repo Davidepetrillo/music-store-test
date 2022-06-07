@@ -54,8 +54,9 @@ namespace MusicStore.Models
             this.Foto = foto;
             this.Prezzo = prezzo;
             this.QuantitaStrumento = quantitaStrumento;
-            this.NumeroLike = numeroLike;
             numeroLike = 0;
+            this.NumeroLike = numeroLike;
+            
         }
     }
 }
