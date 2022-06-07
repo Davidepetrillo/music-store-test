@@ -1,12 +1,7 @@
 ﻿@model LoginAdmin
-@{
-    ViewBag.Title = "Login form";
-}
 
 @using (Html.BeginForm("Login", "Admin"))
-{
-    <span style="font-weight:bolder; font-size:16px; color:red;">@ViewBag.Message</span>
-    
+{      
     <div class="container-fluid ">
         <form action="@Url.Action("Login", "Admin")" method="post" autocomplete="off">
         @Html.AntiForgeryToken()
