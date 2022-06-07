@@ -31,7 +31,7 @@
                  
                 <div class="mb-3">
                     <strong>Categoria:</strong>
-                    <select asp-for="StrumentiMusicali.CategoriaId" class="form-select" aria-label="Default select example">
+                    <select asp-for="StrumentiMusicali.CategoriaId" class="form-select border border-dark" aria-label="Default select example">
                         <option selected>Seleziona una categoria</option>
                         @foreach(Categoria category in Model.Categorie)
                         {
@@ -40,7 +40,7 @@
                     </select>
                 </div>
                 <div class="text-end">
-                    <input type="submit" class="btn btn-small btn-success" value="Salva">
+                    <input type="submit" class="  btn btn-small btn-success mb-3" value="Salva">
                 </div>
             </form>
         </div>

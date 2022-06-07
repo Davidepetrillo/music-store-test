@@ -28,7 +28,7 @@ namespace MusicStore.Models
         [Required(ErrorMessage = "Campo obbligatorio")]
         public int QuantitaStrumento { get; set; }
 
-        public int? NumeroLike { get; set; }
+        public int NumeroLike { get; set; }
 
         //-------------Relazione DB-------------
         public Categoria? Categoria { get; set; }
