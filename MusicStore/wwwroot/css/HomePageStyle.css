@@ -52,7 +52,8 @@ p {
 
 .button {
     padding: 18px 28px;
-    background: #316bff;
+    background-color: transparent;
+    border: 2px solid black;
     color: #fff;
     display: inline-block;
     border-radius: 20px;
@@ -60,7 +61,7 @@ p {
 
 @media (max-width: 768px) {
     .big-text {
-        font-size: 4opx;
+        font-size: 40px;
     }
 }
 

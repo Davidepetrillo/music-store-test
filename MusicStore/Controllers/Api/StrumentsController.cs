@@ -43,7 +43,7 @@ namespace MusicStore.Controllers.Api
 
             using(MusicContext context = new MusicContext())
             {
-                var acquistoStrumento = context.acquistaStrumento.FromSqlRaw("SELECT StrumentoMusicale.Nome AS nomeStrumento, SUM(quantita) AS quantitaAcquistata, StrumentoMusicale.Foto AS fotoStrumento FROM StrumentoMusicale INNER JOIN Acquista ON StrumentoMusicale.Id = Acquista.StrumentoMusicaleId WHERE MONTH(Acquista.Data) >= MONTH(DATEADD(month, -1, GETDATE())) GROUP BY StrumentoMusicale.Id, StrumentoMusicale.Nome, StrumentoMusicale.Foto ORDER BY quantitaAcquistata DESC").ToList();
+                var acquistoStrumento = context.acquistaStrumento.FromSqlRaw("SELECT StrumentoMusicale.Nome AS nomeStrumento, SUM(quantita) AS quantitaAcquistata, StrumentoMusicale.Foto AS fotoStrumento FROM StrumentoMusicale INNER JOIN Acquista ON StrumentoMusicale.Id = Acquista.StrumentoMusicaleId WHERE MONTH(Acquista.Data) > MONTH(DATEADD(month, -1, GETDATE())) GROUP BY StrumentoMusicale.Id, StrumentoMusicale.Nome, StrumentoMusicale.Foto ORDER BY quantitaAcquistata DESC").ToList();
 
                 return Ok(acquistoStrumento);
             }
