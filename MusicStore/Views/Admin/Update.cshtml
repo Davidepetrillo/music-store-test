@@ -24,8 +24,9 @@
         </div>
 
         <div class="form-outline mb-4 ">
-             <label class="form-label" for="Prezzo"> <strong>Prezzo:</strong></label>
-            <input asp-for="StrumentiMusicali.Prezzo" type="number" min="1" step="any" class="form-control border border-dark" />
+             <strong>Prezzo:</strong>
+                <input asp-for="StrumentiMusicali.Prezzo" class="d-block w-10" />
+                <span asp-validation-for="StrumentiMusicali.Prezzo" class="text-danger"></span>
            
         </div>
         <!--<div class="mb-3">
